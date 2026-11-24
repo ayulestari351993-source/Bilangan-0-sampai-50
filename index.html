@@ -1,0 +1,2627 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDU SMART – Matematika Kelas II MI AL-ISLAMIYAH AMZ</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Fredoka (ramah anak) & Nunito (sangat mudah dibaca anak SD/MI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Fredoka', 'sans-serif'],
+            sans: ['Nunito', 'sans-serif'],
+          },
+          colors: {
+            brandGreen: '#10B981',
+            brandGreenDark: '#047857',
+            brandYellow: '#FACC15',
+            brandBlue: '#38BDF8',
+            brandOrange: '#FB923C',
+            creamBg: '#F0FDF4',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: #F0FDF4;
+      background-image: radial-gradient(#BBF7D0 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+      overflow-x: hidden;
+      user-select: none;
+    }
+    h1, h2, h3, .font-display {
+      font-family: 'Fredoka', sans-serif;
+    }
+    /* Tombol 3D Ramah Anak */
+    .btn-kid {
+      transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 5px 0 rgba(0, 0, 0, 0.18);
+    }
+    .btn-kid:hover {
+      transform: translateY(-2px);
+    }
+    .btn-kid:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.18);
+    }
+    /* Animasi Mengambang & Pop */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    .animate-float {
+      animation: floatSlow 3.2s ease-in-out infinite;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.7); opacity: 0; }
+      80% { transform: scale(1.06); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-pop {
+      animation: popIn 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    @keyframes bounceCelebrate {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.12) rotate(-4deg); }
+      75% { transform: scale(1.12) rotate(4deg); }
+    }
+    .animate-celebrate {
+      animation: bounceCelebrate 0.6s ease-in-out;
+    }
+    /* Custom Scrollbar ramah anak */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #E0F2FE;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #34D399;
+      border-radius: 999px;
+    }
+  </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col">
+
+  <!-- HEADER & IDENTITAS MADRASAH -->
+  <header class="bg-gradient-to-r from-emerald-600 via-teal-600 to-sky-600 text-white shadow-lg sticky top-0 z-40 border-b-4 border-amber-400">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-2">
+      <!-- Logo & Judul -->
+      <div class="flex items-center gap-3">
+        <div class="bg-white p-1.5 rounded-2xl shadow-md flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 border-2 border-amber-300">
+          <!-- SVG Maskot Angka & Madrasah -->
+          <svg viewBox="0 0 64 64" class="w-10 h-10">
+            <circle cx="32" cy="34" r="24" fill="#FACC15" stroke="#047857" stroke-width="3"/>
+            <path d="M12 24 Q32 8 52 24 Z" fill="#10B981" stroke="#047857" stroke-width="2.5"/>
+            <circle cx="32" cy="10" r="3" fill="#FB923C"/>
+            <circle cx="24" cy="33" r="3" fill="#1E293B"/>
+            <circle cx="40" cy="33" r="3" fill="#1E293B"/>
+            <path d="M25 42 Q32 49 39 42" fill="none" stroke="#1E293B" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="19" cy="38" r="2.5" fill="#FB7185" opacity="0.7"/>
+            <circle cx="45" cy="38" r="2.5" fill="#FB7185" opacity="0.7"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 class="text-xl sm:text-2xl font-display font-bold tracking-wide text-amber-300 drop-shadow">EDU SMART</h1>
+            <span class="bg-white/20 text-white text-xs sm:text-sm font-extrabold px-2.5 py-0.5 rounded-full border border-white/40">MI AL-ISLAMIYAH AMZ</span>
+          </div>
+          <p class="text-xs sm:text-sm text-emerald-50 font-bold">Matematika Kelas II (Fase A) • Membilang Bilangan 0–50</p>
+        </div>
+      </div>
+
+      <!-- Status Skor, Lencana & Kontrol Suara -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button id="btnToggleSound" onclick="toggleAudio()" class="btn-kid bg-amber-400 hover:bg-amber-300 text-slate-900 font-extrabold px-3 py-2 rounded-2xl text-xs sm:text-sm flex items-center gap-1.5 border-2 border-amber-500" title="Aktifkan/Matikan Suara">
+          <span id="soundIcon">🔊</span>
+          <span class="hidden sm:inline" id="soundLabel">Suara Aktif</span>
+        </button>
+        <div class="bg-white/15 backdrop-blur-sm border-2 border-amber-300/70 px-3 py-1.5 rounded-2xl flex items-center gap-2">
+          <span class="text-lg">⭐</span>
+          <div class="leading-tight">
+            <div class="text-[10px] uppercase tracking-wider text-amber-200 font-bold">Poin Belajar</div>
+            <div id="globalScoreDisplay" class="text-sm sm:text-base font-black text-white">0 Poin</div>
+          </div>
+        </div>
+        <button onclick="navigateTo('refleksi')" class="btn-kid bg-orange-400 hover:bg-orange-300 text-white font-extrabold px-3 py-2 rounded-2xl text-xs sm:text-sm flex items-center gap-1 border-2 border-orange-500">
+          <span>🏅</span>
+          <span id="badgeCountDisplay">0/4</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Slogan Berjalan / Banner Slogan -->
+    <div class="bg-amber-300 text-emerald-950 text-center py-1 px-3 text-xs sm:text-sm font-black tracking-wide shadow-inner">
+      ✨ "BELAJAR MATEMATIKA MENYENANGKAN, MENGHITUNG DENGAN TELITI, MENUNTUT ILMU DENGAN CINTA." ✨
+    </div>
+  </header>
+
+  <!-- NAVIGASI 10 MENU UTAMA -->
+  <nav class="bg-white/95 backdrop-blur shadow-md border-b-2 border-emerald-200 sticky top-[88px] sm:top-[96px] z-30">
+    <div class="max-w-7xl mx-auto px-2 py-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar" id="mainNavContainer">
+      <!-- Tombol menu dirender via JS agar status aktif selalu sinkron -->
+    </div>
+  </nav>
+
+  <!-- KOTAK PESAN / FEEDBACK BANNER RAMAH ANAK (Pengganti alert()) -->
+  <div id="toastBanner" class="fixed bottom-5 right-5 left-5 sm:left-auto sm:w-96 z-50 hidden transform transition-all duration-300">
+    <div id="toastCard" class="bg-white border-4 border-emerald-500 rounded-3xl p-4 shadow-2xl flex items-start gap-3">
+      <div id="toastEmoji" class="text-3xl bg-emerald-100 p-2 rounded-2xl">🌟</div>
+      <div class="flex-1">
+        <h4 id="toastTitle" class="font-display font-bold text-emerald-800 text-base">Hebat Sekali!</h4>
+        <p id="toastMessage" class="text-sm text-slate-700 font-semibold mt-0.5">Kamu menghitung dengan sangat teliti.</p>
+      </div>
+      <button onclick="hideToast()" class="text-slate-400 hover:text-slate-700 font-black text-lg px-1">✕</button>
+    </div>
+  </div>
+
+  <!-- KONTEN UTAMA DINAMIS -->
+  <main id="appContent" class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-5 sm:py-7">
+    <!-- Konten masing-masing dari 10 menu akan dirender di sini -->
+  </main>
+
+  <!-- FOOTER IDENTITAS -->
+  <footer class="bg-emerald-900 text-emerald-100 py-5 px-4 mt-10 border-t-4 border-amber-400">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+      <div>
+        <p class="font-display font-bold text-amber-300 text-base">AYU LESTARI, S.Pd.I • MI AL-ISLAMIYAH AMZ</p>
+        <p class="text-xs text-emerald-200">Kurikulum Merdeka & Kurikulum Berbasis Cinta (KBC) Kemenag RI • Fase A Kelas II</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-2 text-xs font-bold">
+        <span class="bg-emerald-800 px-3 py-1 rounded-full border border-emerald-600">💚 Cinta Allah & Rasul-Nya</span>
+        <span class="bg-sky-800 px-3 py-1 rounded-full border border-sky-600">📘 Cinta Ilmu</span>
+        <span class="bg-amber-800 px-3 py-1 rounded-full border border-amber-600">🤝 Cinta Diri & Sesama</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT UTAMA APLIKASI -->
+  <script>
+    /*************************************************************************
+     * 1. STATE APLIKASI & PENYIMPANAN PROGRES BELAJAR
+     *************************************************************************/
+    const appState = {
+      currentPage: 'beranda',
+      soundEnabled: true,
+      basmalahRead: false,
+      points: 0,
+      badges: {
+        ketelitian: false,     // Terbuka saat menyelesaikan Modul Membilang Benda dengan tepat
+        semangat: false,       // Terbuka saat eksplorasi angka / menyelesaikan kuis atau game
+        kerjasama: false,      // Terbuka saat menyelesaikan aktivitas berbagi kurma / refleksi KBC
+        pantangMenyerah: false // Terbuka saat mencoba ulang atau menyelesaikan tantangan puluhan/evaluasi
+      },
+      // State Modul 1: Mengenal Angka
+      selectedNumber: 0,
+      exploredNumbers: new Set([0]),
+      // State Modul 2: Ayo Membilang Benda
+      countingMissionIdx: 0,
+      countedItems: new Set(),
+      countingReflectionAnswered: false,
+      // State Modul 3: Mengelompokkan Puluhan & Satuan
+      sticksTotal: 36,
+      selectedLooseSticks: new Set(),
+      bundlesCount: 0,
+      looseSticksCount: 36,
+      tensBoxCount: 0,
+      onesBoxCount: 0,
+      placeValueChallengeIdx: 0,
+      // State Modul 4: Membaca & Menulis Bilangan
+      rwMode: 'numToText', // 'numToText' | 'textToNum'
+      rwIndex: 0,
+      rwScore: 0,
+      // State Modul 5: Laboratorium Matematika
+      labTab: 'exp1',
+      exp1TasbihCount: 0,
+      exp1KurmaDistributed: [0, 0, 0, 0], // 40 kurma dibagi ke 4 teman (masing-masing 10)
+      exp2Target: 43,
+      exp2Tens: 0,
+      exp2Ones: 0,
+      exp3Step: 1,
+      // State Modul 8: Permainan Edukatif
+      activeGame: 'tebak',
+      gameLevel: 'mudah',
+      gameScore: 0,
+      gameStateData: {},
+      // State Modul 2B: Asesmen Diagnostik (1-20)
+      diagAnswers: {},
+      diagSubmitted: false,
+      // State Modul 9: Kuis & Evaluasi Sumatif + Remedial & Pengayaan
+      evalMode: 'sumatif', // 'sumatif' | 'remedial' | 'pengayaan'
+      sumatifAnswers: {},
+      sumatifSubmitted: false,
+      remedialCounted: new Set(),
+      pengayaanStep: 0,
+      // State Modul 10: Refleksi
+      reflectionSaved: false
+    };
+
+    const MENU_ITEMS = [
+      { id: 'beranda', label: '1. Beranda', icon: '🏠' },
+      { id: 'tujuan', label: '2. Tujuan & Diagnostik', icon: '🎯' },
+      { id: 'mengenal', label: '3. Mengenal Angka 0–50', icon: '🔢' },
+      { id: 'membilang', label: '4. Ayo Membilang Benda', icon: '🍎' },
+      { id: 'puluhan', label: '5. Kelompokkan Puluhan', icon: '🥢' },
+      { id: 'bacatulis', label: '6. Baca & Tulis Bilangan', icon: '✏️' },
+      { id: 'laboratorium', label: '7. Lab Matematika', icon: '🔬' },
+      { id: 'permainan', label: '8. Permainan Edukatif', icon: '🎮' },
+      { id: 'evaluasi', label: '9. Kuis & Evaluasi', icon: '📝' },
+      { id: 'refleksi', label: '10. Refleksi & Lencana', icon: '🏆' }
+    ];
+
+    /*************************************************************************
+     * 2. UTILITAS AUDIO (WEB AUDIO API & SPEECH SYNTHESIS BAHASA INDONESIA)
+     *************************************************************************/
+    let audioCtx = null;
+
+    function initAudioContext() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) audioCtx = new AudioContext();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playTone(type = 'click') {
+      if (!appState.soundEnabled) return;
+      try {
+        initAudioContext();
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+        if (type === 'click') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(520, now);
+          osc.frequency.exponentialRampToValueAtTime(680, now + 0.08);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+          osc.start(now);
+          osc.stop(now + 0.09);
+        } else if (type === 'success') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now); // C5
+          osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+          osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
+          osc.frequency.setValueAtTime(1046.50, now + 0.3); // C6
+          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
+          osc.start(now);
+          osc.stop(now + 0.55);
+        } else if (type === 'gentle') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(340, now);
+          osc.frequency.linearRampToValueAtTime(290, now + 0.22);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+          osc.start(now);
+          osc.stop(now + 0.25);
+        } else if (type === 'bundle') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.18);
+          gain.gain.setValueAtTime(0.16, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+          osc.start(now);
+          osc.stop(now + 0.2);
+        }
+      } catch (e) {
+        // Abaikan jika browser memblokir audio sebelum interaksi
+      }
+    }
+
+    function speakText(text) {
+      if (!appState.soundEnabled) return;
+      try {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = 'id-ID';
+          utterance.rate = 0.92; // Sedikit perlahan agar jelas untuk anak kelas 2 SD/MI
+          utterance.pitch = 1.1;
+          window.speechSynthesis.speak(utterance);
+        }
+      } catch (e) {
+        // Fallback diam jika TTS tidak didukung
+      }
+    }
+
+    function toggleAudio() {
+      appState.soundEnabled = !appState.soundEnabled;
+      document.getElementById('soundIcon').textContent = appState.soundEnabled ? '🔊' : '🔇';
+      document.getElementById('soundLabel').textContent = appState.soundEnabled ? 'Suara Aktif' : 'Suara Mati';
+      if (appState.soundEnabled) {
+        playTone('click');
+        showToast('Suara Diaktifkan', 'Pelafalan angka dan efek suara siap menemani belajarmu!', '🔊');
+      }
+    }
+
+    /*************************************************************************
+     * 3. HELPER BAHASA INDONESIA & TERBILANG (0 - 50)
+     *************************************************************************/
+    function terbilang(n) {
+      const satuan = ['Nol', 'Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan', 'Sembilan'];
+      if (n < 0 || n > 50) return '';
+      if (n < 10) return satuan[n];
+      if (n === 10) return 'Sepuluh';
+      if (n === 11) return 'Sebelas';
+      if (n < 20) return satuan[n - 10] + ' belas';
+      const puluh = Math.floor(n / 10);
+      const sisa = n % 10;
+      if (sisa === 0) return satuan[puluh] + ' puluh';
+      return satuan[puluh] + ' puluh ' + satuan[sisa].toLowerCase();
+    }
+
+    function addPoints(pts, reason = '') {
+      appState.points += pts;
+      document.getElementById('globalScoreDisplay').textContent = `${appState.points} Poin`;
+      if (appState.points >= 30 && !appState.badges.semangat) {
+        unlockBadge('semangat', 'Bintang Semangat Belajar');
+      }
+    }
+
+    function unlockBadge(key, title) {
+      if (!appState.badges[key]) {
+        appState.badges[key] = true;
+        const count = Object.values(appState.badges).filter(Boolean).length;
+        document.getElementById('badgeCountDisplay').textContent = `${count}/4`;
+        playTone('success');
+        showToast(`Lencana Baru Terbuka! 🏅`, `Selamat! Kamu meraih "${title}"!`, '🌟');
+      }
+    }
+
+    let toastTimeout = null;
+    function showToast(title, message, emoji = '🌟', isWarning = false) {
+      const banner = document.getElementById('toastBanner');
+      const card = document.getElementById('toastCard');
+      document.getElementById('toastTitle').textContent = title;
+      document.getElementById('toastMessage').textContent = message;
+      document.getElementById('toastEmoji').textContent = emoji;
+
+      card.className = isWarning
+        ? 'bg-amber-50 border-4 border-amber-400 rounded-3xl p-4 shadow-2xl flex items-start gap-3 animate-pop'
+        : 'bg-white border-4 border-emerald-500 rounded-3xl p-4 shadow-2xl flex items-start gap-3 animate-pop';
+
+      banner.classList.remove('hidden');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        hideToast();
+      }, 4200);
+    }
+
+    function hideToast() {
+      document.getElementById('toastBanner').classList.add('hidden');
+    }
+
+    /*************************************************************************
+     * 4. ILUSTRASI SVG KARAKTER & BENDA KONKRET RAMAH ANAK
+     *************************************************************************/
+    function getCharacterSVG(type = 'guru') {
+      if (type === 'siswa_putra') {
+        return `<svg viewBox="0 0 120 120" class="w-24 h-24 sm:w-28 sm:h-28 mx-auto animate-float">
+          <circle cx="60" cy="60" r="54" fill="#DBEAFE" stroke="#38BDF8" stroke-width="4"/>
+          <!-- Peci Hitam -->
+          <path d="M36 42 Q60 32 84 42 L82 28 Q60 22 38 28 Z" fill="#1E293B"/>
+          <!-- Wajah -->
+          <circle cx="60" cy="56" r="22" fill="#FDE68A"/>
+          <circle cx="52" cy="54" r="3" fill="#1E293B"/>
+          <circle cx="68" cy="54" r="3" fill="#1E293B"/>
+          <path d="M53 64 Q60 71 67 64" fill="none" stroke="#1E293B" stroke-width="3" stroke-linecap="round"/>
+          <!-- Baju Koko Hijau -->
+          <path d="M32 106 Q36 80 60 80 Q84 80 88 106 Z" fill="#10B981"/>
+          <line x1="60" y1="80" x2="60" y2="106" stroke="#047857" stroke-width="2.5"/>
+        </svg>`;
+      }
+      if (type === 'siswa_putri') {
+        return `<svg viewBox="0 0 120 120" class="w-24 h-24 sm:w-28 sm:h-28 mx-auto animate-float">
+          <circle cx="60" cy="60" r="54" fill="#FEF3C7" stroke="#FACC15" stroke-width="4"/>
+          <!-- Jilbab Putih-Hijau -->
+          <path d="M32 60 Q32 24 60 24 Q88 24 88 60 L94 102 Q60 110 26 102 Z" fill="#FFFFFF" stroke="#10B981" stroke-width="3"/>
+          <!-- Wajah -->
+          <circle cx="60" cy="55" r="19" fill="#FDE68A"/>
+          <circle cx="53" cy="53" r="2.8" fill="#1E293B"/>
+          <circle cx="67" cy="53" r="2.8" fill="#1E293B"/>
+          <path d="M54 62 Q60 68 66 62" fill="none" stroke="#1E293B" stroke-width="2.8" stroke-linecap="round"/>
+          <circle cx="48" cy="58" r="2.5" fill="#FB7185" opacity="0.6"/>
+          <circle cx="72" cy="58" r="2.5" fill="#FB7185" opacity="0.6"/>
+        </svg>`;
+      }
+      // Default: Ibu/Bapak Guru Madrasah Ramah
+      return `<svg viewBox="0 0 120 120" class="w-24 h-24 sm:w-28 sm:h-28 mx-auto animate-float">
+        <circle cx="60" cy="60" r="54" fill="#D1FAE5" stroke="#10B981" stroke-width="4"/>
+        <path d="M30 62 Q30 22 60 22 Q90 22 90 62 L96 105 Q60 112 24 105 Z" fill="#059669"/>
+        <circle cx="60" cy="54" r="20" fill="#FDE68A"/>
+        <!-- Kacamata Edukatif -->
+        <circle cx="52" cy="52" r="6" fill="none" stroke="#1E293B" stroke-width="2.2"/>
+        <circle cx="68" cy="52" r="6" fill="none" stroke="#1E293B" stroke-width="2.2"/>
+        <line x1="58" y1="52" x2="62" y2="52" stroke="#1E293B" stroke-width="2.2"/>
+        <circle cx="52" cy="52" r="2" fill="#1E293B"/>
+        <circle cx="68" cy="52" r="2" fill="#1E293B"/>
+        <path d="M53 63 Q60 69 67 63" fill="none" stroke="#1E293B" stroke-width="2.8" stroke-linecap="round"/>
+      </svg>`;
+    }
+
+    function renderObjectItemSVG(itemType, index = 0) {
+      const colors = ['#EF4444', '#F97316', '#3B82F6', '#10B981', '#A855F7', '#EC4899'];
+      const c = colors[index % colors.length];
+      switch (itemType) {
+        case 'apel':
+          return `<svg viewBox="0 0 48 48" class="w-9 h-9 sm:w-11 sm:h-11 mx-auto">
+            <path d="M24 12 C16 10 8 16 10 28 C12 39 20 43 24 41 C28 43 36 39 38 28 C40 16 32 10 24 12 Z" fill="#EF4444" stroke="#991B1B" stroke-width="2"/>
+            <path d="M24 12 Q26 5 31 5" fill="none" stroke="#78350F" stroke-width="2.5" stroke-linecap="round"/>
+            <ellipse cx="29" cy="9" rx="5" ry="2.5" transform="rotate(-20 29 9)" fill="#22C55E"/>
+          </svg>`;
+        case 'jeruk':
+          return `<svg viewBox="0 0 48 48" class="w-9 h-9 sm:w-11 sm:h-11 mx-auto">
+            <circle cx="24" cy="26" r="16" fill="#FB923C" stroke="#C2410C" stroke-width="2"/>
+            <circle cx="19" cy="21" r="1.5" fill="#FED7AA"/>
+            <circle cx="28" cy="30" r="1.5" fill="#FED7AA"/>
+            <path d="M24 10 Q28 5 33 8 Q29 13 24 10 Z" fill="#16A34A"/>
+          </svg>`;
+        case 'kelereng':
+          return `<svg viewBox="0 0 48 48" class="w-9 h-9 sm:w-11 sm:h-11 mx-auto">
+            <circle cx="24" cy="24" r="16" fill="${c}" stroke="#1E293B" stroke-width="2"/>
+            <path d="M14 20 Q24 14 34 24 Q24 34 14 28 Z" fill="#FFFFFF" opacity="0.55"/>
+            <circle cx="18" cy="17" r="3" fill="#FFFFFF" opacity="0.85"/>
+          </svg>`;
+        case 'congklak':
+          return `<svg viewBox="0 0 48 48" class="w-9 h-9 sm:w-11 sm:h-11 mx-auto">
+            <ellipse cx="24" cy="25" rx="13" ry="16" fill="#B45309" stroke="#78350F" stroke-width="2"/>
+            <ellipse cx="20" cy="20" rx="4" ry="6" fill="#FDE68A" opacity="0.5"/>
+          </svg>`;
+        case 'bunga':
+          return `<svg viewBox="0 0 48 48" class="w-9 h-9 sm:w-11 sm:h-11 mx-auto">
+            <circle cx="24" cy="13" r="7" fill="#F472B6"/>
+            <circle cx="35" cy="21" r="7" fill="#F472B6"/>
+            <circle cx="31" cy="34" r="7" fill="#F472B6"/>
+            <circle cx="17" cy="34" r="7" fill="#F472B6"/>
+            <circle cx="13" cy="21" r="7" fill="#F472B6"/>
+            <circle cx="24" cy="24" r="7" fill="#FACC15" stroke="#CA8A04" stroke-width="1.5"/>
+          </svg>`;
+        case 'stik':
+        default:
+          return `<svg viewBox="0 0 48 48" class="w-9 h-9 sm:w-11 sm:h-11 mx-auto">
+            <rect x="19" y="5" width="10" height="38" rx="5" fill="${c}" stroke="#1E293B" stroke-width="1.8"/>
+            <line x1="24" y1="10" x2="24" y2="38" stroke="#FFFFFF" stroke-width="1.5" opacity="0.5"/>
+          </svg>`;
+      }
+    }
+
+    /*************************************************************************
+     * 5. NAVIGASI UTAMA
+     *************************************************************************/
+    function renderNavbar() {
+      const nav = document.getElementById('mainNavContainer');
+      nav.innerHTML = MENU_ITEMS.map(item => {
+        const active = appState.currentPage === item.id;
+        return `
+          <button onclick="navigateTo('${item.id}')"
+            class="btn-kid whitespace-nowrap px-3.5 py-2 rounded-2xl font-extrabold text-xs sm:text-sm flex items-center gap-1.5 border-2 transition-all
+            ${active
+              ? 'bg-emerald-600 text-white border-emerald-800 shadow-md scale-[1.02]'
+              : 'bg-emerald-50 hover:bg-amber-100 text-emerald-900 border-emerald-200'}">
+            <span class="text-base">${item.icon}</span>
+            <span>${item.label}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function navigateTo(pageId) {
+      playTone('click');
+      appState.currentPage = pageId;
+      renderNavbar();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      const container = document.getElementById('appContent');
+      switch (pageId) {
+        case 'beranda': renderBeranda(container); break;
+        case 'tujuan': renderTujuan(container); break;
+        case 'mengenal': renderMengenalAngka(container); break;
+        case 'membilang': renderMembilangBenda(container); break;
+        case 'puluhan': renderKelompokPuluhan(container); break;
+        case 'bacatulis': renderBacaTulis(container); break;
+        case 'laboratorium': renderLaboratorium(container); break;
+        case 'permainan': renderPermainan(container); break;
+        case 'evaluasi': renderEvaluasi(container); break;
+        case 'refleksi': renderRefleksi(container); break;
+        default: renderBeranda(container);
+      }
+    }
+
+    /*************************************************************************
+     * MENU 1: BERANDA (Basmalah, Karakter Pendamping, Pertanyaan Pemantik)
+     *************************************************************************/
+    const PERTANYAAN_PEMANTIK = [
+      {
+        q: '1. Jika kamu mempunyai 36 biji congklak, bagaimana cara menghitungnya agar cepat dan tidak mudah lupa?',
+        hint: 'Kelompokkan biji congklak menjadi 10-10! Jadi ada 3 kelompok sepuluh (30) dan 6 biji satuan = 36.'
+      },
+      {
+        q: '2. Mengapa menghitung 10 benda sekaligus lebih mudah daripada menghitung satu per satu?',
+        hint: 'Karena kita tidak mudah lupa hitungan di tengah jalan dan langsung tahu nilai puluhannya!'
+      },
+      {
+        q: '3. Apa perbedaan angka 24 dan 42?',
+        hint: 'Pada 24, ada 2 puluhan dan 4 satuan (dua puluh empat). Pada 42, ada 4 puluhan dan 2 satuan (empat puluh dua).'
+      },
+      {
+        q: '4. Bagaimana cara mengetahui jumlah benda tanpa menghitungnya satu per satu?',
+        hint: 'Dengan mengelompokkan benda dalam wadah atau ikatan berisi 10 benda setiap kelompoknya.'
+      },
+      {
+        q: '5. Jika ada 0 buah apel, apakah berarti ada apel yang bisa dihitung?',
+        hint: 'Tidak ada! Angka 0 (nol) artinya kosong atau tidak ada benda sama sekali.'
+      }
+    ];
+
+    function renderBeranda(el) {
+      el.innerHTML = `
+        <div class="space-y-6 animate-pop">
+          <!-- Hero Card Selamat Datang & Basmalah -->
+          <div class="bg-gradient-to-br from-white via-emerald-50 to-sky-100 rounded-3xl p-5 sm:p-8 border-4 border-emerald-400 shadow-xl relative overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+              <div class="lg:col-span-7 space-y-4">
+                <div class="inline-flex items-center gap-2 bg-amber-300 text-emerald-950 font-black px-4 py-1.5 rounded-full text-xs sm:text-sm shadow">
+                  <span>🕌</span>
+                  <span>MI AL-ISLAMIYAH AMZ • KURIKULUM MERDEKA & KBC • AYU LESTARI, S.Pd.I</span>
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-display font-bold text-emerald-900 leading-tight">
+                  Assalamu'alaikum, Anak Hebat Kelas II! 👋
+                </h2>
+                <p class="text-base sm:text-lg text-slate-700 font-bold leading-relaxed">
+                  Selamat datang di <span class="text-emerald-700 font-black">EDU SMART</span>! Hari ini kita akan berpetualang mengenal dan membilang bilangan dari <span class="bg-amber-200 px-2 py-0.5 rounded-lg text-emerald-900 font-black">0 sampai 50</span> dengan penuh semangat dan ketelitian.
+                </p>
+
+                <!-- Tombol Pembiasaan Basmalah (Panca Cinta: Cinta Allah & Rasul-Nya) -->
+                <div class="bg-white/90 border-2 border-emerald-300 rounded-2xl p-4 shadow-sm">
+                  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                      <p class="text-xs font-extrabold text-emerald-700 uppercase">💚 Pembiasaan Cinta Allah SWT & Rasul-Nya</p>
+                      <p class="text-lg sm:text-xl font-bold text-slate-800 mt-0.5">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
+                      <p class="text-xs sm:text-sm text-slate-600 italic">"Dengan menyebut nama Allah Yang Maha Pengasih lagi Maha Penyayang"</p>
+                    </div>
+                    <button onclick="bacaBasmalah()" class="btn-kid ${appState.basmalahRead ? 'bg-emerald-600 text-white border-emerald-800' : 'bg-amber-400 hover:bg-amber-300 text-slate-900 border-amber-600'} font-black px-4 py-3 rounded-2xl text-sm border-2 shrink-0">
+                      ${appState.basmalahRead ? '✅ Sudah Baca Basmalah (+10 Poin)' : '🤲 Klik Baca Basmalah'}
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Tombol Mulai Belajar -->
+                <div class="flex flex-wrap gap-3 pt-1">
+                  <button onclick="navigateTo('tujuan')" class="btn-kid bg-emerald-600 hover:bg-emerald-500 text-white font-display font-bold text-base sm:text-lg px-6 py-3.5 rounded-2xl border-2 border-emerald-800 flex items-center gap-2">
+                    <span>🚀</span> Mulai Belajar Sekarang
+                  </button>
+                  <button onclick="navigateTo('permainan')" class="btn-kid bg-orange-400 hover:bg-orange-300 text-white font-display font-bold text-base sm:text-lg px-6 py-3.5 rounded-2xl border-2 border-orange-600 flex items-center gap-2">
+                    <span>🎮</span> Langsung Bermain
+                  </button>
+                </div>
+              </div>
+
+              <!-- Karakter Pendamping Edukatif -->
+              <div class="lg:col-span-5 bg-white/80 rounded-3xl p-4 border-2 border-sky-200 shadow-inner">
+                <p class="text-center font-display font-bold text-sky-800 text-sm mb-3">Teman Belajarmu di MI Al-Islamiyah AMZ</p>
+                <div class="grid grid-cols-3 gap-2 text-center">
+                  <div>
+                    ${getCharacterSVG('guru')}
+                    <span class="inline-block mt-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-0.5 rounded-full">Ustadzah Amina</span>
+                  </div>
+                  <div>
+                    ${getCharacterSVG('siswa_putra')}
+                    <span class="inline-block mt-1 bg-sky-100 text-sky-800 text-xs font-extrabold px-2.5 py-0.5 rounded-full">Ahmad</span>
+                  </div>
+                  <div>
+                    ${getCharacterSVG('siswa_putri')}
+                    <span class="inline-block mt-1 bg-amber-100 text-amber-800 text-xs font-extrabold px-2.5 py-0.5 rounded-full">Fatimah</span>
+                  </div>
+                </div>
+                <div class="mt-4 bg-sky-50 border border-sky-200 rounded-2xl p-3 text-center">
+                  <p class="text-xs sm:text-sm font-bold text-sky-900">
+                    "Anak-anak saleh dan salehah, mari kita hitung benda di sekitar kita dengan teliti dan jujur ya!"
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 Pilar Pembelajaran Mendalam & KBC -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-white rounded-3xl p-5 border-4 border-emerald-300 shadow-md">
+              <div class="text-3xl mb-2">🧠</div>
+              <h3 class="font-display font-bold text-lg text-emerald-800">1. Berkesadaran (Mindful)</h3>
+              <p class="text-sm text-slate-600 font-semibold mt-1">Kita mengamati benda dengan tenang, menghitung satu per satu, dan memeriksa kembali agar tidak ada yang terlewat.</p>
+            </div>
+            <div class="bg-white rounded-3xl p-5 border-4 border-sky-300 shadow-md">
+              <div class="text-3xl mb-2">🌴</div>
+              <h3 class="font-display font-bold text-lg text-sky-800">2. Bermakna (Meaningful)</h3>
+              <p class="text-sm text-slate-600 font-semibold mt-1">Belajar menghitung menggunakan buah kurma, tasbih, biji congklak, kelereng, stik es krim, dan alat tulis di madrasah.</p>
+            </div>
+            <div class="bg-white rounded-3xl p-5 border-4 border-amber-300 shadow-md">
+              <div class="text-3xl mb-2">🎉</div>
+              <h3 class="font-display font-bold text-lg text-amber-800">3. Menggembirakan (Joyful)</h3>
+              <p class="text-sm text-slate-600 font-semibold mt-1">Ada permainan interaktif, suara pelafalan angka, lencana bintang, dan tidak perlu takut salah karena kita belajar bersama!</p>
+            </div>
+          </div>
+
+          <!-- 5 Pertanyaan Pemantik Interaktif -->
+          <div class="bg-white rounded-3xl p-5 sm:p-7 border-4 border-amber-300 shadow-lg">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-3xl bg-amber-100 p-2.5 rounded-2xl">💡</span>
+              <div>
+                <h3 class="font-display font-bold text-xl sm:text-2xl text-slate-800">Pertanyaan Pemantik Diskusi</h3>
+                <p class="text-xs sm:text-sm text-slate-600 font-bold">Klik setiap pertanyaan untuk melihat petunjuk jawaban dari Ustadzah!</p>
+              </div>
+            </div>
+            <div class="space-y-3">
+              ${PERTANYAAN_PEMANTIK.map((item, idx) => `
+                <div class="border-2 border-amber-200 rounded-2xl overflow-hidden bg-amber-50/50">
+                  <button onclick="togglePemantik(${idx})" class="w-full text-left p-4 font-extrabold text-sm sm:text-base text-slate-800 flex items-center justify-between gap-2 hover:bg-amber-100/70 transition">
+                    <span>${item.q}</span>
+                    <span id="pemantikIcon-${idx}" class="text-amber-600 text-lg shrink-0">➕</span>
+                  </button>
+                  <div id="pemantikHint-${idx}" class="hidden px-4 pb-4 pt-1 text-sm font-bold text-emerald-800 bg-white border-t border-amber-200">
+                    💬 Petunjuk Ustadzah: ${item.hint}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function bacaBasmalah() {
+      playTone('success');
+      speakText('Bismillahirrahmanirrahim. Selamat belajar anak hebat!');
+      if (!appState.basmalahRead) {
+        appState.basmalahRead = true;
+        addPoints(10);
+        showToast('Alhamdulillah!', 'Kamu mengawali belajar dengan Basmalah. Dapat +10 Poin!', '🤲');
+        renderBeranda(document.getElementById('appContent'));
+      } else {
+        showToast('MasyaAllah!', 'Semoga Allah memudahkan kita memahami ilmu hari ini.', '💚');
+      }
+    }
+
+    function togglePemantik(idx) {
+      playTone('click');
+      const hint = document.getElementById(`pemantikHint-${idx}`);
+      const icon = document.getElementById(`pemantikIcon-${idx}`);
+      const isHidden = hint.classList.contains('hidden');
+      hint.classList.toggle('hidden');
+      icon.textContent = isHidden ? '➖' : '➕';
+    }
+
+    /*************************************************************************
+     * MENU 2: TUJUAN PEMBELAJARAN & ASESMEN DIAGNOSTIK (1 - 20)
+     *************************************************************************/
+    const TUJUAN_LIST = [
+      'Mengenali lambang bilangan cacah dari 0 sampai 50 dengan tepat.',
+      'Membilang banyak benda konkret di sekitar sampai dengan 50 secara teliti.',
+      'Mengelompokkan benda dalam kelompok sepuluh sebagai konsep puluhan.',
+      'Membilang maju dan mundur dari 0 sampai 50.',
+      'Membaca dan menuliskan lambang bilangan serta nama bilangan 21–50.',
+      'Mengenali hubungan antara kelompok puluhan dan satuan.',
+      'Menjelaskan cara memperoleh suatu bilangan melalui pengelompokan benda.'
+    ];
+
+    const DIAGNOSTIK_SOAL = [
+      { id: 'd1', q: 'Ada berapa buah apel di samping? 🍎🍎🍎🍎🍎 🍎🍎🍎', options: ['6', '8', '9'], ans: '8' },
+      { id: 'd2', q: 'Lambang bilangan dari "lima belas" adalah...', options: ['15', '51', '14'], ans: '15' },
+      { id: 'd3', q: 'Urutan bilangan maju setelah 17, 18, 19 adalah...', options: ['16', '20', '21'], ans: '20' },
+      { id: 'd4', q: 'Jika tidak ada pensil di dalam kotak, jumlah pensilnya adalah...', options: ['1', '10', '0'], ans: '0' }
+    ];
+
+    function renderTujuan(el) {
+      el.innerHTML = `
+        <div class="space-y-6 animate-pop">
+          <!-- Peta Tujuan Pembelajaran -->
+          <div class="bg-white rounded-3xl p-5 sm:p-7 border-4 border-emerald-400 shadow-lg">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+              <div class="flex items-center gap-3">
+                <span class="text-4xl bg-emerald-100 p-3 rounded-2xl">🎯</span>
+                <div>
+                  <h2 class="font-display font-bold text-2xl text-emerald-900">Tujuan Pembelajaran Kita</h2>
+                  <p class="text-sm text-slate-600 font-bold">Bab 1: Bilangan Cacah sampai dengan 50 • Kelas II MI</p>
+                </div>
+              </div>
+              <button onclick="speakText('Mari kita pahami tujuan belajar kita hari ini agar belajar lebih terarah dan berkesadaran.')" class="btn-kid bg-sky-500 text-white font-bold px-4 py-2 rounded-2xl text-xs sm:text-sm border-2 border-sky-700">
+                🔊 Dengarkan Penjelasan
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              ${TUJUAN_LIST.map((t, i) => `
+                <div class="flex items-start gap-3 bg-emerald-50/80 border-2 border-emerald-200 p-3.5 rounded-2xl">
+                  <span class="bg-emerald-600 text-white font-display font-bold w-8 h-8 rounded-xl flex items-center justify-center shrink-0 shadow">${i + 1}</span>
+                  <p class="text-sm sm:text-base font-bold text-slate-800">${t}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Asesmen Diagnostik Awal (1 - 20) -->
+          <div class="bg-gradient-to-br from-sky-50 to-amber-50 rounded-3xl p-5 sm:p-7 border-4 border-sky-400 shadow-lg">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-3xl bg-white p-2.5 rounded-2xl shadow">🩺</span>
+              <div>
+                <h3 class="font-display font-bold text-xl sm:text-2xl text-sky-900">Cek Kesiapan Awal (Asesmen Diagnostik 0–20)</h3>
+                <p class="text-xs sm:text-sm text-slate-600 font-bold">Sebelum membilang sampai 50, yuk ingat kembali bilangan 0 sampai 20!</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${DIAGNOSTIK_SOAL.map((s, idx) => `
+                <div class="bg-white rounded-2xl p-4 border-2 border-sky-200 shadow-sm">
+                  <p class="font-extrabold text-sm sm:text-base text-slate-800 mb-3">${idx + 1}. ${s.q}</p>
+                  <div class="flex gap-2">
+                    ${s.options.map(opt => {
+                      const chosen = appState.diagAnswers[s.id] === opt;
+                      let btnStyle = chosen
+                        ? 'bg-sky-600 text-white border-sky-800'
+                        : 'bg-sky-50 hover:bg-sky-100 text-sky-900 border-sky-200';
+                      if (appState.diagSubmitted && chosen) {
+                        btnStyle = opt === s.ans
+                          ? 'bg-emerald-600 text-white border-emerald-800'
+                          : 'bg-amber-500 text-white border-amber-700';
+                      }
+                      return `
+                        <button onclick="selectDiagAnswer('${s.id}', '${opt}')" class="btn-kid flex-1 py-2.5 rounded-xl font-black text-base border-2 ${btnStyle}">
+                          ${opt}
+                        </button>
+                      `;
+                    }).join('')}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+
+            <div class="mt-5 flex flex-wrap items-center justify-between gap-3">
+              <button onclick="submitDiagnostik()" class="btn-kid bg-emerald-600 hover:bg-emerald-500 text-white font-display font-bold px-6 py-3 rounded-2xl border-2 border-emerald-800 text-base">
+                ✅ Periksa Kesiapan Saya
+              </button>
+              ${appState.diagSubmitted ? `
+                <div class="bg-white px-4 py-2.5 rounded-2xl border-2 border-emerald-400 font-extrabold text-sm text-emerald-900">
+                  Skor Diagnostik: ${DIAGNOSTIK_SOAL.filter(s => appState.diagAnswers[s.id] === s.ans).length} dari ${DIAGNOSTIK_SOAL.length} benar! Siap lanjut ke Modul 3! 🚀
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function selectDiagAnswer(id, opt) {
+      playTone('click');
+      appState.diagAnswers[id] = opt;
+      renderTujuan(document.getElementById('appContent'));
+    }
+
+    function submitDiagnostik() {
+      if (Object.keys(appState.diagAnswers).length < DIAGNOSTIK_SOAL.length) {
+        playTone('gentle');
+        showToast('Ayo Lengkapi!', 'Jawab keempat pertanyaan persiapan di atas dulu ya!', '😊', true);
+        return;
+      }
+      appState.diagSubmitted = true;
+      const benar = DIAGNOSTIK_SOAL.filter(s => appState.diagAnswers[s.id] === s.ans).length;
+      playTone('success');
+      addPoints(benar * 5);
+      showToast('Kesiapan Awal Selesai!', `Kamu menjawab benar ${benar} dari 4 soal. Yuk lanjut mengenal angka 0–50!`, '🎯');
+      renderTujuan(document.getElementById('appContent'));
+    }
+
+    /*************************************************************************
+     * MENU 3: MODUL 1 – AYO MENGENAL ANGKA 0 SAMPAI 50
+     *************************************************************************/
+    function renderMengenalAngka(el) {
+      const n = appState.selectedNumber;
+      const nama = terbilang(n);
+      const puluhan = Math.floor(n / 10);
+      const satuan = n % 10;
+
+      // Visual benda sesuai jumlah (jika 0 = kotak kosong)
+      let visualHTML = '';
+      if (n === 0) {
+        visualHTML = `
+          <div class="border-4 border-dashed border-slate-300 rounded-3xl p-6 text-center bg-slate-50">
+            <div class="text-5xl mb-2">📭</div>
+            <p class="font-display font-bold text-lg text-slate-600">Kotak Kosong (0 Benda)</p>
+            <p class="text-xs sm:text-sm text-slate-500 font-bold">Angka 0 artinya tidak ada benda sama sekali di dalam kotak.</p>
+          </div>
+        `;
+      } else {
+        // Kelompokkan visual per 10 agar konsep puluhan langsung terlihat sejak awal!
+        let groupsHTML = '';
+        for (let g = 0; g < puluhan; g++) {
+          groupsHTML += `
+            <div class="bg-emerald-50 border-2 border-emerald-400 rounded-2xl p-2 flex flex-wrap gap-1 justify-center items-center shadow-sm">
+              <span class="w-full text-center text-[10px] font-black text-emerald-700 uppercase">Kelompok 10</span>
+              ${Array(10).fill(0).map((_, i) => `<span class="text-lg sm:text-xl">🍎</span>`).join('')}
+            </div>
+          `;
+        }
+        let looseHTML = '';
+        if (satuan > 0) {
+          looseHTML = `
+            <div class="bg-amber-50 border-2 border-amber-400 rounded-2xl p-2 flex flex-wrap gap-1 justify-center items-center shadow-sm">
+              <span class="w-full text-center text-[10px] font-black text-amber-700 uppercase">${satuan} Satuan</span>
+              ${Array(satuan).fill(0).map(() => `<span class="text-lg sm:text-xl">🍊</span>`).join('')}
+            </div>
+          `;
+        }
+        visualHTML = `
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 max-h-60 overflow-y-auto p-1">
+            ${groupsHTML}
+            ${looseHTML}
+          </div>
+        `;
+      }
+
+      // Grid Kartu Angka 0 sampai 50
+      let cardsHTML = '';
+      for (let i = 0; i <= 50; i++) {
+        const isSelected = i === n;
+        const isExplored = appState.exploredNumbers.has(i);
+        cardsHTML += `
+          <button onclick="selectNumberCard(${i})"
+            class="btn-kid py-2.5 sm:py-3 rounded-2xl font-display font-bold text-lg sm:text-xl border-2 transition
+            ${isSelected
+              ? 'bg-orange-500 text-white border-orange-700 scale-105 ring-4 ring-amber-300'
+              : isExplored
+                ? 'bg-emerald-100 text-emerald-900 border-emerald-400'
+                : 'bg-white hover:bg-amber-100 text-slate-800 border-slate-200'}">
+            ${i}
+          </button>
+        `;
+      }
+
+      el.innerHTML = `
+        <div class="space-y-6 animate-pop">
+          <!-- Panel Tampilan Angka Besar & Pelafalan -->
+          <div class="bg-white rounded-3xl p-5 sm:p-7 border-4 border-sky-400 shadow-xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+              <!-- Kartu Angka Raksasa -->
+              <div class="lg:col-span-5 bg-gradient-to-br from-amber-300 via-yellow-200 to-orange-200 rounded-3xl p-6 text-center border-4 border-amber-500 shadow-inner">
+                <span class="inline-block bg-white/80 text-amber-900 text-xs font-black px-3 py-1 rounded-full mb-2">Lambang Bilangan</span>
+                <div class="text-7xl sm:text-8xl font-display font-bold text-emerald-900 drop-shadow-md my-1">${n}</div>
+                <div class="bg-white rounded-2xl py-2.5 px-4 mt-3 border-2 border-amber-400 shadow">
+                  <p class="text-xs font-extrabold text-slate-500 uppercase">Nama Bilangan</p>
+                  <p class="text-xl sm:text-2xl font-display font-bold text-orange-600">${nama}</p>
+                </div>
+                <div class="flex justify-center gap-2 mt-4">
+                  <button onclick="speakNumber(${n})" class="btn-kid bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold px-4 py-2.5 rounded-2xl text-sm border-2 border-emerald-800 flex items-center gap-1.5">
+                    <span>🔊</span> Ucapkan Angka
+                  </button>
+                  ${n > 0 ? `<button onclick="selectNumberCard(${n - 1})" class="btn-kid bg-white text-slate-800 font-black px-3.5 py-2.5 rounded-2xl border-2 border-slate-300">⬅️ Mundur</button>` : ''}
+                  ${n < 50 ? `<button onclick="selectNumberCard(${n + 1})" class="btn-kid bg-white text-slate-800 font-black px-3.5 py-2.5 rounded-2xl border-2 border-slate-300">Maju ➡️</button>` : ''}
+                </div>
+              </div>
+
+              <!-- Visualisasi Benda Konkret -->
+              <div class="lg:col-span-7 space-y-3">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-display font-bold text-lg sm:text-xl text-slate-800">Visualisasi Benda (${n} Benda)</h3>
+                  <span class="bg-sky-100 text-sky-900 text-xs font-black px-3 py-1 rounded-full">
+                    ${puluhan} Puluhan + ${satuan} Satuan
+                  </span>
+                </div>
+                ${visualHTML}
+                <p class="text-xs sm:text-sm text-slate-600 font-bold bg-emerald-50 p-3 rounded-2xl border border-emerald-200">
+                  💡 <strong>Tips Membilang:</strong> Kamu sudah mengenal <strong>${appState.exploredNumbers.size} dari 51</strong> bilangan. Klik kartu angka di bawah untuk mendengar suaranya!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Papan Kartu Angka 0 - 50 -->
+          <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-emerald-400 shadow-lg">
+            <h3 class="font-display font-bold text-lg sm:text-xl text-emerald-900 mb-3">Pilih Kartu Angka 0 sampai 50:</h3>
+            <div class="grid grid-cols-6 sm:grid-cols-10 md:grid-cols-11 gap-2">
+              ${cardsHTML}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function selectNumberCard(num) {
+      appState.selectedNumber = num;
+      appState.exploredNumbers.add(num);
+      playTone('click');
+      speakNumber(num);
+      if (appState.exploredNumbers.size === 15) {
+        addPoints(15);
+        showToast('Penjelajah Angka!', 'Kamu sudah mengeksplorasi 15 kartu angka! +15 Poin!', '🔢');
+      }
+      renderMengenalAngka(document.getElementById('appContent'));
+    }
+
+    function speakNumber(num) {
+      speakText(`${num}. ${terbilang(num)}`);
+    }
+
+    /*************************************************************************
+     * MENU 4: MODUL 2 – AYO MEMBILANG BENDA (15, 23, 28, 36, 42, 50)
+     *************************************************************************/
+    const COUNTING_MISSIONS = [
+      { id: 'm1', title: '15 Buah Apel Segar', type: 'apel', target: 15, story: 'Ibu guru membawa sekeranjang buah apel untuk dibagikan saat istirahat.' },
+      { id: 'm2', title: '23 Buah Jeruk Manis', type: 'jeruk', target: 23, story: 'Ahmad membantu ayah menghitung buah jeruk hasil panen di kebun.' },
+      { id: 'm3', title: '28 Kelereng Warna-Warni', type: 'kelereng', target: 28, story: 'Setelah bermain bersama teman, mari kita hitung kelereng agar tidak hilang.' },
+      { id: 'm4', title: '36 Biji Congklak', type: 'congklak', target: 36, story: 'Fatimah dan Aisyah bermain congklak. Ayo hitung biji congklaknya dengan teliti!' },
+      { id: 'm5', title: '42 Bunga Taman Madrasah', type: 'bunga', target: 42, story: 'Taman MI Al-Islamiyah AMZ sangat indah. Berapa banyak bunga yang mekar?' },
+      { id: 'm6', title: '50 Stik Es Krim', type: 'stik', target: 50, story: 'Kita akan membuat prakarya dari stik es krim. Hitung semuanya sampai 50 ya!' }
+    ];
+
+    function renderMembilangBenda(el) {
+      const mission = COUNTING_MISSIONS[appState.countingMissionIdx];
+      const currentCount = appState.countedItems.size;
+      const isComplete = currentCount === mission.target;
+
+      // Render benda satu per satu
+      let itemsGrid = '';
+      for (let i = 0; i < mission.target; i++) {
+        const isCounted = appState.countedItems.has(i);
+        // Cari nomor urut saat siswa menyentuh benda ini
+        const orderIndex = Array.from(appState.countedItems).indexOf(i) + 1;
+        itemsGrid += `
+          <button onclick="tapCountableItem(${i})"
+            class="relative p-2 rounded-2xl border-2 transition-all transform active:scale-90 flex flex-col items-center justify-center
+            ${isCounted
+              ? 'bg-emerald-100 border-emerald-500 shadow-inner scale-95'
+              : 'bg-white hover:bg-amber-50 border-slate-200 shadow-sm hover:-translate-y-0.5'}">
+            ${renderObjectItemSVG(mission.type, i)}
+            ${isCounted
+              ? `<span class="absolute -top-2 -right-2 bg-emerald-600 text-white text-xs font-black w-6 h-6 rounded-full flex items-center justify-center shadow border border-white animate-pop">${orderIndex}</span>`
+              : `<span class="text-[10px] text-slate-400 font-bold mt-0.5">Sentuh</span>`}
+          </button>
+        `;
+      }
+
+      el.innerHTML = `
+        <div class="space-y-6 animate-pop">
+          <!-- Pilihan Misi Membilang -->
+          <div class="bg-white rounded-3xl p-4 sm:p-5 border-4 border-orange-300 shadow-md">
+            <p class="font-display font-bold text-sm sm:text-base text-slate-700 mb-2.5">Pilih Benda yang Ingin Kamu Hitung:</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+              ${COUNTING_MISSIONS.map((m, idx) => `
+                <button onclick="selectCountingMission(${idx})"
+                  class="btn-kid p-2.5 rounded-2xl font-extrabold text-xs sm:text-sm border-2 text-center
+                  ${idx === appState.countingMissionIdx
+                    ? 'bg-orange-500 text-white border-orange-700'
+                    : 'bg-orange-50 hover:bg-orange-100 text-orange-900 border-orange-200'}">
+                  ${m.title}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Area Kerja Membilang Aktif -->
+          <div class="bg-white rounded-3xl p-5 sm:p-7 border-4 border-emerald-400 shadow-xl">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b-2 border-emerald-100">
+              <div>
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-3 py-1 rounded-full">🧠 Berkesadaran: Sentuh Satu per Satu</span>
+                <h2 class="font-display font-bold text-2xl text-slate-800 mt-1">${mission.title}</h2>
+                <p class="text-sm text-slate-600 font-bold">${mission.story}</p>
+              </div>
+
+              <!-- Penghitung Digital & Kontrol -->
+              <div class="flex items-center gap-3 bg-amber-50 p-3 rounded-2xl border-2 border-amber-300 shrink-0">
+                <div class="text-center px-3">
+                  <div class="text-xs font-extrabold text-amber-800 uppercase">Hasil Hitunganmu</div>
+                  <div class="text-4xl font-display font-bold text-emerald-700">${currentCount}</div>
+                  <div class="text-xs font-bold text-slate-600">${terbilang(currentCount)}</div>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <button onclick="checkCountingProgress()" class="btn-kid bg-sky-500 hover:bg-sky-400 text-white font-extrabold px-3.5 py-2 rounded-xl text-xs border-2 border-sky-700">
+                    🔍 Cek Hitungan
+                  </button>
+                  <button onclick="resetCountingMission()" class="btn-kid bg-slate-200 hover:bg-slate-300 text-slate-800 font-extrabold px-3.5 py-2 rounded-xl text-xs border-2 border-slate-400">
+                    🔄 Ulangi dari 0
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Grid Benda untuk Disentuh -->
+            <div class="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 gap-2.5 my-5 bg-emerald-50/50 p-4 rounded-3xl border-2 border-emerald-200">
+              ${itemsGrid}
+            </div>
+
+            <!-- Refleksi Berkesadaran & Hasil Akhir (Muncul setelah mencoba menghitung) -->
+            ${isComplete ? `
+              <div class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-3xl p-5 shadow-lg animate-pop">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div>
+                    <h3 class="font-display font-bold text-xl sm:text-2xl text-amber-300">🎉 MasyaAllah! Semua ${mission.target} Benda Sudah Terhitung!</h3>
+                    <p class="text-sm sm:text-base font-bold mt-1">
+                      Refleksi Berkesadaran: <em>"Apakah kamu sudah menghitung semua benda dengan teliti tanpa ada yang terlewat?"</em>
+                    </p>
+                  </div>
+                  <button onclick="confirmCountingReflection()" class="btn-kid bg-amber-400 hover:bg-amber-300 text-slate-900 font-black px-5 py-3 rounded-2xl border-2 border-amber-600 shrink-0">
+                    ✅ Ya, Sudah Teliti! (+20 Poin)
+                  </button>
+                </div>
+              </div>
+            ` : `
+              <div class="bg-sky-50 border-2 border-sky-200 rounded-2xl p-3.5 text-center">
+                <p class="text-xs sm:text-sm font-bold text-sky-900">
+                  👉 Sentuh setiap gambar benda di atas satu per satu. Perhatikan nomor urut yang muncul agar tidak ada benda yang terlewat atau terhitung dua kali!
+                </p>
+              </div>
+            `}
+          </div>
+        </div>
+      `;
+    }
+
+    function selectCountingMission(idx) {
+      playTone('click');
+      appState.countingMissionIdx = idx;
+      appState.countedItems = new Set();
+      appState.countingReflectionAnswered = false;
+      renderMembilangBenda(document.getElementById('appContent'));
+    }
+
+    function tapCountableItem(itemIdx) {
+      const mission = COUNTING_MISSIONS[appState.countingMissionIdx];
+      if (appState.countedItems.has(itemIdx)) {
+        // Umpan balik ramah jika siswa menyentuh benda yang sudah dihitung dua kali!
+        playTone('gentle');
+        showToast(
+          'Hati-hati Terhitung Dua Kali! 😊',
+          'Benda ini sudah diberi tanda centang nomor. Ayo sentuh benda lain yang belum dihitung!',
+          '☝️',
+          true
+        );
+        return;
+      }
+      appState.countedItems.add(itemIdx);
+      const countNow = appState.countedItems.size;
+      playTone('click');
+      speakText(String(countNow));
+
+      if (countNow === mission.target) {
+        playTone('success');
+        speakText(`Hebat! Semuanya ada ${mission.target}. ${terbilang(mission.target)}.`);
+      }
+      renderMembilangBenda(document.getElementById('appContent'));
+    }
+
+    function checkCountingProgress() {
+      const mission = COUNTING_MISSIONS[appState.countingMissionIdx];
+      const current = appState.countedItems.size;
+      const sisa = mission.target - current;
+      if (sisa === 0) {
+        playTone('success');
+        showToast('Sempurna!', `Semua ${mission.target} benda sudah kamu hitung dengan tepat!`, '🌟');
+      } else {
+        playTone('gentle');
+        showToast(
+          'Masih Ada yang Terlewat 🔍',
+          `Kamu baru menghitung ${current} benda. Masih ada ${sisa} benda yang belum disentuh. Ayo lanjutkan dengan teliti!`,
+          '👀',
+          true
+        );
+      }
+    }
+
+    function resetCountingMission() {
+      playTone('click');
+      appState.countedItems = new Set();
+      appState.countingReflectionAnswered = false;
+      renderMembilangBenda(document.getElementById('appContent'));
+    }
+
+    function confirmCountingReflection() {
+      if (!appState.countingReflectionAnswered) {
+        appState.countingReflectionAnswered = true;
+        addPoints(20);
+        unlockBadge('ketelitian', 'Bintang Ketelitian');
+      } else {
+        showToast('Hebat!', 'Kamu sudah menyelesaikan refleksi ketelitian untuk benda ini.', '⭐');
+      }
+    }
+
+    /*************************************************************************
+     * MENU 5: MODUL 3 – MENGELOMPOKKAN PULUHAN & SATUAN (LAB STIK ES KRIM)
+     *************************************************************************/
+    const PLACE_VALUE_CHALLENGES = [
+      { target: 36, story: 'Simulasi Utama: Bentuklah bilangan 36 menggunakan stik es krim!' },
+      { target: 47, story: 'Tantangan Spesial: Bisakah kamu membentuk bilangan 47 menggunakan stik es krim?' },
+      { target: 25, story: 'Latihan Tambahan: Bentuklah bilangan 25 (2 puluhan dan 5 satuan)!' },
+      { target: 50, story: 'Tantangan Puncak: Ikat semua 50 stik menjadi 5 ikatan puluhan!' }
+    ];
+
+    function renderKelompokPuluhan(el) {
+      const challenge = PLACE_VALUE_CHALLENGES[appState.placeValueChallengeIdx];
+      const totalInBoxes = (appState.tensBoxCount * 10) + appState.onesBoxCount;
+      const expectedTens = Math.floor(challenge.target / 10);
+      const expectedOnes = challenge.target % 10;
+      const isTargetMatched = (appState.tensBoxCount === expectedTens && appState.onesBoxCount === expectedOnes);
+
+      // Render stik satuan lepas di meja kerja
+      let looseSticksHTML = '';
+      for (let i = 0; i < appState.looseSticksCount; i++) {
+        const isSelected = appState.selectedLooseSticks.has(i);
+        looseSticksHTML += `
+          <button onclick="toggleSelectStick(${i})"
+            class="p-1.5 rounded-xl border-2 transition-all flex flex-col items-center
+            ${isSelected
+              ? 'bg-amber-200 border-orange-500 -translate-y-2 shadow-md ring-2 ring-orange-400'
+              : 'bg-white hover:bg-slate-50 border-slate-200'}">
+            <div class="w-3 h-12 rounded-full ${isSelected ? 'bg-orange-500' : 'bg-amber-400'} border border-amber-700"></div>
+            <span class="text-[10px] font-black mt-0.5 text-slate-600">${isSelected ? '✓' : i + 1}</span>
+          </button>
+        `;
+      }
+
+      // Render ikatan 10 stik yang sudah diikat karet gelang virtual
+      let bundlesReadyHTML = '';
+      for (let b = 0; b < appState.bundlesCount; b++) {
+        bundlesReadyHTML += `
+          <div class="bg-emerald-100 border-2 border-emerald-500 rounded-2xl p-2.5 flex flex-col items-center shadow animate-pop">
+            <div class="relative flex items-center justify-center px-2 py-1">
+              <div class="flex gap-0.5">
+                ${Array(10).fill(0).map(() => `<div class="w-1.5 h-12 bg-amber-500 rounded-full border border-amber-800"></div>`).join('')}
+              </div>
+              <!-- Karet Gelang Merah Virtual -->
+              <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 h-2.5 bg-red-500 rounded-full border border-red-800 shadow"></div>
+            </div>
+            <span class="text-xs font-black text-emerald-900 mt-1">1 Ikatan (10)</span>
+            <div class="flex gap-1 mt-1.5">
+              <button onclick="moveBundleToTensBox()" class="btn-kid bg-emerald-600 text-white text-[11px] font-extrabold px-2 py-1 rounded-lg">
+                ➡️ Kotak Puluhan
+              </button>
+              <button onclick="unbundleStick()" class="btn-kid bg-rose-100 text-rose-800 text-[11px] font-extrabold px-2 py-1 rounded-lg border border-rose-300" title="Lepas Karet Gelang">
+                ✂️ Lepas
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      el.innerHTML = `
+        <div class="space-y-6 animate-pop">
+          <!-- Banner Tantangan Membentuk Bilangan -->
+          <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white rounded-3xl p-5 sm:p-6 shadow-xl border-4 border-amber-400">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+              <div>
+                <span class="bg-amber-300 text-emerald-950 text-xs font-black px-3 py-1 rounded-full uppercase">🔬 Laboratorium Puluhan & Satuan</span>
+                <h2 class="font-display font-bold text-xl sm:text-2xl mt-2">${challenge.story}</h2>
+                <p class="text-xs sm:text-sm text-emerald-100 font-bold mt-1">
+                  Langkah: (1) Pilih 10 stik lepas atau klik "Pilih 10 Otomatis", (2) Klik "Ikat dengan Karet Gelang", (3) Pindahkan ke Kotak Puluhan & Satuan!
+                </p>
+              </div>
+              <div class="flex flex-wrap gap-2 shrink-0">
+                ${PLACE_VALUE_CHALLENGES.map((c, idx) => `
+                  <button onclick="setPlaceValueChallenge(${idx})"
+                    class="btn-kid px-3.5 py-2 rounded-2xl font-display font-bold text-sm border-2
+                    ${idx === appState.placeValueChallengeIdx
+                      ? 'bg-amber-400 text-slate-950 border-amber-600'
+                      : 'bg-white/15 hover:bg-white/25 text-white border-white/40'}">
+                    Target: ${c.target}
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
+          <!-- Meja Kerja Stik Es Krim -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+            <!-- Kolom Kiri: Stik Lepas & Pengikatan -->
+            <div class="lg:col-span-7 bg-white rounded-3xl p-5 border-4 border-amber-300 shadow-lg space-y-4">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <h3 class="font-display font-bold text-lg text-slate-800">Stik Es Krim di Meja (${appState.looseSticksCount} Lepas)</h3>
+                  <p class="text-xs font-bold text-slate-500">Terpilih untuk diikat: <span class="text-orange-600 font-black">${appState.selectedLooseSticks.size} / 10 stik</span></p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  <button onclick="autoSelectTenSticks()" class="btn-kid bg-sky-500 hover:bg-sky-400 text-white font-extrabold px-3 py-2 rounded-xl text-xs border-2 border-sky-700">
+                    ✨ Pilih 10 Stik
+                  </button>
+                  <button onclick="bundleSelectedSticks()" class="btn-kid bg-orange-500 hover:bg-orange-400 text-white font-extrabold px-3 py-2 rounded-xl text-xs border-2 border-orange-700">
+                    🪢 Ikat Karet Gelang (${appState.selectedLooseSticks.size}/10)
+                  </button>
+                  <button onclick="moveOneLooseToOnesBox()" class="btn-kid bg-amber-400 hover:bg-amber-300 text-slate-900 font-extrabold px-3 py-2 rounded-xl text-xs border-2 border-amber-600">
+                    ➡️ 1 ke Kotak Satuan
+                  </button>
+                </div>
+              </div>
+
+              <!-- Daftar Stik Lepas -->
+              <div class="bg-amber-50/70 p-3.5 rounded-2xl border-2 border-amber-200 min-h-[140px]">
+                ${appState.looseSticksCount > 0
+                  ? `<div class="grid grid-cols-6 sm:grid-cols-10 gap-1.5">${looseSticksHTML}</div>`
+                  : `<p class="text-center text-sm font-bold text-slate-400 py-8">Semua stik sudah diikat atau dipindahkan ke kotak nilai tempat!</p>`}
+              </div>
+
+              <!-- Area Ikatan Siap Pindah -->
+              <div>
+                <h4 class="font-display font-bold text-sm text-emerald-800 mb-2">Ikatan Puluhan yang Sudah Diikat (${appState.bundlesCount} Ikatan):</h4>
+                <div class="flex flex-wrap gap-3 min-h-[90px] bg-emerald-50/60 p-3 rounded-2xl border-2 border-dashed border-emerald-300">
+                  ${bundlesReadyHTML || '<p class="text-xs font-bold text-slate-400 my-auto mx-auto">Belum ada ikatan di meja. Ikat 10 stik untuk membuat 1 puluhan!</p>'}
+                </div>
+              </div>
+            </div>
+
+            <!-- Kolom Kanan: Kotak Nilai Tempat (Puluhan & Satuan) -->
+            <div class="lg:col-span-5 bg-white rounded-3xl p-5 border-4 border-sky-400 shadow-lg flex flex-col justify-between space-y-4">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <h3 class="font-display font-bold text-xl text-sky-900">Kotak Nilai Tempat</h3>
+                  <button onclick="resetPlaceValueLab()" class="btn-kid bg-slate-200 text-slate-800 font-extrabold px-3 py-1.5 rounded-xl text-xs border border-slate-400">
+                    🔄 Reset Meja
+                  </button>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                  <!-- Kotak Puluhan -->
+                  <div class="bg-emerald-50 border-4 border-emerald-500 rounded-2xl p-3 text-center flex flex-col justify-between min-h-[210px]">
+                    <div>
+                      <span class="bg-emerald-600 text-white text-xs font-black px-3 py-1 rounded-full">PULUHAN (10-an)</span>
+                      <div class="text-4xl font-display font-bold text-emerald-800 my-2">${appState.tensBoxCount}</div>
+                      <div class="flex flex-wrap justify-center gap-1.5 my-2">
+                        ${Array(appState.tensBoxCount).fill(0).map(() => `
+                          <div class="bg-amber-400 border-2 border-amber-700 px-2 py-1 rounded-lg text-[10px] font-black text-amber-950 shadow-sm">
+                            🥢10
+                          </div>
+                        `).join('')}
+                      </div>
+                    </div>
+                    ${appState.tensBoxCount > 0 ? `
+                      <button onclick="removeBundleFromTensBox()" class="btn-kid bg-white text-emerald-800 text-xs font-extrabold py-1.5 rounded-xl border border-emerald-400 mt-2">
+                        ⬅️ Keluarkan 1 Ikatan
+                      </button>
+                    ` : ''}
+                  </div>
+
+                  <!-- Kotak Satuan -->
+                  <div class="bg-amber-50 border-4 border-amber-500 rounded-2xl p-3 text-center flex flex-col justify-between min-h-[210px]">
+                    <div>
+                      <span class="bg-amber-500 text-white text-xs font-black px-3 py-1 rounded-full">SATUAN (1-an)</span>
+                      <div class="text-4xl font-display font-bold text-amber-800 my-2">${appState.onesBoxCount}</div>
+                      <div class="flex flex-wrap justify-center gap-1 my-2">
+                        ${Array(appState.onesBoxCount).fill(0).map(() => `
+                          <div class="w-2.5 h-8 bg-orange-400 border border-orange-700 rounded-full"></div>
+                        `).join('')}
+                      </div>
+                    </div>
+                    ${appState.onesBoxCount > 0 ? `
+                      <button onclick="removeOneFromOnesBox()" class="btn-kid bg-white text-amber-800 text-xs font-extrabold py-1.5 rounded-xl border border-amber-400 mt-2">
+                        ⬅️ Keluarkan 1 Stik
+                      </button>
+                    ` : ''}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Hasil Susunan Siswa -->
+              <div class="bg-slate-900 text-white rounded-2xl p-4 text-center">
+                <p class="text-xs text-amber-300 font-bold uppercase">Bilangan yang Kamu Susun di Kotak:</p>
+                <div class="text-3xl sm:text-4xl font-display font-bold text-white my-1">
+                  ${totalInBoxes} <span class="text-base font-sans text-emerald-300">(${appState.tensBoxCount} puluhan + ${appState.onesBoxCount} satuan)</span>
+                </div>
+                <p class="text-sm font-extrabold text-amber-200">"${terbilang(totalInBoxes)}"</p>
+
+                ${isTargetMatched ? `
+                  <div class="mt-3 bg-emerald-600 p-3 rounded-xl border-2 border-amber-300 animate-pop">
+                    <p class="font-display font-bold text-base text-white">🎉 Berhasil! Kamu menyusun bilangan ${challenge.target} dengan tepat!</p>
+                    <button onclick="nextPlaceValueChallenge()" class="btn-kid mt-2 bg-amber-400 text-slate-950 font-black px-4 py-1.5 rounded-xl text-xs">
+                      Lanjut Tantangan Berikutnya ➡️
+                    </button>
+                  </div>
+                ` : `
+                  <p class="text-xs text-slate-300 mt-2">Targetmu adalah membentuk bilangan <strong class="text-amber-300">${challenge.target}</strong> (${expectedTens} puluhan + ${expectedOnes} satuan).</p>
+                `}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function setPlaceValueChallenge(idx) {
+      playTone('click');
+      appState.placeValueChallengeIdx = idx;
+      resetPlaceValueLab();
+    }
+
+    function resetPlaceValueLab() {
+      const target = PLACE_VALUE_CHALLENGES[appState.placeValueChallengeIdx].target;
+      // Berikan stik cukup untuk membentuk target (maks 50)
+      appState.sticksTotal = target;
+      appState.looseSticksCount = target;
+      appState.selectedLooseSticks = new Set();
+      appState.bundlesCount = 0;
+      appState.tensBoxCount = 0;
+      appState.onesBoxCount = 0;
+      renderKelompokPuluhan(document.getElementById('appContent'));
+    }
+
+    function toggleSelectStick(idx) {
+      playTone('click');
+      if (appState.selectedLooseSticks.has(idx)) {
+        appState.selectedLooseSticks.delete(idx);
+      } else {
+        if (appState.selectedLooseSticks.size >= 10) {
+          showToast('Sudah 10 Stik!', 'Satu ikatan puluhan berisi tepat 10 stik. Sekarang klik tombol "Ikat Karet Gelang"!', '🪢');
+          return;
+        }
+        appState.selectedLooseSticks.add(idx);
+      }
+      renderKelompokPuluhan(document.getElementById('appContent'));
+    }
+
+    function autoSelectTenSticks() {
+      if (appState.looseSticksCount < 10) {
+        playTone('gentle');
+        showToast('Stik Kurang dari 10', 'Sisa stik lepas kurang dari 10, sehingga tidak bisa diikat menjadi puluhan. Pindahkan ke Kotak Satuan!', '💡', true);
+        return;
+      }
+      playTone('click');
+      appState.selectedLooseSticks = new Set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+      renderKelompokPuluhan(document.getElementById('appContent'));
+    }
+
+    function bundleSelectedSticks() {
+      if (appState.selectedLooseSticks.size !== 10) {
+        playTone('gentle');
+        showToast(
+          'Harus Tepat 10 Stik!',
+          `Kamu baru memilih ${appState.selectedLooseSticks.size} stik. Pilih tepat 10 stik untuk diikat menjadi 1 puluhan!`,
+          '🥢',
+          true
+        );
+        return;
+      }
+      playTone('bundle');
+      appState.looseSticksCount -= 10;
+      appState.selectedLooseSticks = new Set();
+      appState.bundlesCount += 1;
+      speakText('Satu ikatan puluhan berhasil dibuat!');
+      renderKelompokPuluhan(document.getElementById('appContent'));
+    }
+
+    function unbundleStick() {
+      if (appState.bundlesCount > 0) {
+        playTone('click');
+        appState.bundlesCount -= 1;
+        appState.looseSticksCount += 10;
+        appState.selectedLooseSticks = new Set();
+        renderKelompokPuluhan(document.getElementById('appContent'));
+      }
+    }
+
+    function moveBundleToTensBox() {
+      if (appState.bundlesCount > 0) {
+        playTone('click');
+        appState.bundlesCount -= 1;
+        appState.tensBoxCount += 1;
+        checkPlaceValueCompletion();
+        renderKelompokPuluhan(document.getElementById('appContent'));
+      }
+    }
+
+    function removeBundleFromTensBox() {
+      if (appState.tensBoxCount > 0) {
+        playTone('click');
+        appState.tensBoxCount -= 1;
+        appState.bundlesCount += 1;
+        renderKelompokPuluhan(document.getElementById('appContent'));
+      }
+    }
+
+    function moveOneLooseToOnesBox() {
+      if (appState.looseSticksCount > 0) {
+        playTone('click');
+        appState.looseSticksCount -= 1;
+        appState.selectedLooseSticks = new Set();
+        appState.onesBoxCount += 1;
+        checkPlaceValueCompletion();
+        renderKelompokPuluhan(document.getElementById('appContent'));
+      }
+    }
+
+    function removeOneFromOnesBox() {
+      if (appState.onesBoxCount > 0) {
+        playTone('click');
+        appState.onesBoxCount -= 1;
+        appState.looseSticksCount += 1;
+        renderKelompokPuluhan(document.getElementById('appContent'));
+      }
+    }
+
+    function checkPlaceValueCompletion() {
+      const challenge = PLACE_VALUE_CHALLENGES[appState.placeValueChallengeIdx];
+      const expectedTens = Math.floor(challenge.target / 10);
+      const expectedOnes = challenge.target % 10;
+      if (appState.tensBoxCount === expectedTens && appState.onesBoxCount === expectedOnes) {
+        playTone('success');
+        addPoints(25);
+        speakText(`Hebat! ${challenge.target} sama dengan ${expectedTens} puluhan dan ${expectedOnes} satuan.`);
+        if (challenge.target === 47) {
+          unlockBadge('pantangMenyerah', 'Bintang Pantang Menyerah');
+        }
+      }
+    }
+
+    function nextPlaceValueChallenge() {
+      appState.placeValueChallengeIdx = (appState.placeValueChallengeIdx + 1) % PLACE_VALUE_CHALLENGES.length;
+      resetPlaceValueLab();
+    }
+
+    /*************************************************************************
+     * MENU 6: MODUL 4 – AYO MEMBACA DAN MENULIS BILANGAN (PAPAN TULIS VIRTUAL)
+     *************************************************************************/
+    const RW_NUM_TO_TEXT = [
+      { num: 21, text: 'dua puluh satu' },
+      { num: 25, text: 'dua puluh lima' },
+      { num: 32, text: 'tiga puluh dua' },
+      { num: 38, text: 'tiga puluh delapan' },
+      { num: 45, text: 'empat puluh lima' },
+      { num: 50, text: 'lima puluh' }
+    ];
+
+    const RW_TEXT_TO_NUM = [
+      { text: 'Tiga puluh enam', num: '36' },
+      { text: 'Empat puluh dua', num: '42' },
+      { text: 'Empat puluh sembilan', num: '49' },
+      { text: 'Dua puluh tujuh', num: '27' },
+      { text: 'Tiga puluh empat', num: '34' },
+      { text: 'Lima puluh', num: '50' }
+    ];
+
+    function renderBacaTulis(el) {
+      const isNumToText = appState.rwMode === 'numToText';
+      const list = isNumToText ? RW_NUM_TO_TEXT : RW_TEXT_TO_NUM;
+      const item = list[appState.rwIndex % list.length];
+
+      el.innerHTML = `
+        <div class="space-y-6 animate-pop">
+          <!-- Pilihan Mode Kegiatan -->
+          <div class="bg-white rounded-3xl p-4 sm:p-5 border-4 border-sky-400 shadow-md flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap gap-2">
+              <button onclick="switchRWMode('numToText')"
+                class="btn-kid px-4 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm border-2
+                ${isNumToText ? 'bg-emerald-600 text-white border-emerald-800' : 'bg-emerald-50 text-emerald-900 border-emerald-200'}">
+                A. Dari Angka Menjadi Tulisan
+              </button>
+              <button onclick="switchRWMode('textToNum')"
+                class="btn-kid px-4 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm border-2
+                ${!isNumToText ? 'bg-orange-500 text-white border-orange-700' : 'bg-orange-50 text-orange-900 border-orange-200'}">
+                B. Dari Tulisan Menjadi Angka
+              </button>
+            </div>
+            <div class="bg-amber-100 text-amber-900 font-black px-4 py-2 rounded-2xl text-xs sm:text-sm border border-amber-300">
+              Latihan ke-${(appState.rwIndex % list.length) + 1} dari ${list.length} • Skor: ${appState.rwScore}
+            </div>
+          </div>
+
+          <!-- Papan Tulis Virtual Interaktif -->
+          <div class="bg-emerald-900 rounded-3xl p-5 sm:p-8 border-8 border-amber-700 shadow-2xl text-white">
+            <div class="max-w-2xl mx-auto text-center space-y-5">
+              <span class="inline-block bg-white/15 text-amber-300 text-xs font-black px-4 py-1 rounded-full uppercase tracking-wider">
+                Papan Tulis Virtual MI Al-Islamiyah AMZ
+              </span>
+
+              <div class="bg-emerald-950/70 border-2 border-emerald-600 rounded-3xl p-6">
+                <p class="text-sm text-emerald-200 font-bold mb-2">
+                  ${isNumToText ? 'Tuliskan nama bilangan dari angka berikut:' : 'Tuliskan lambang bilangan (angka) dari tulisan berikut:'}
+                </p>
+                <div class="text-4xl sm:text-6xl font-display font-bold text-amber-300 my-2">
+                  ${isNumToText ? item.num : `"${item.text}"`}
+                </div>
+                <button onclick="speakText('${isNumToText ? item.text : item.text}')" class="btn-kid mt-2 bg-white/15 hover:bg-white/25 text-white text-xs font-bold px-3.5 py-1.5 rounded-full">
+                  🔊 Dengarkan Pelafalan
+                </button>
+              </div>
+
+              <!-- Input Jawaban Siswa -->
+              <div class="space-y-3">
+                <input id="rwInputBox" type="${isNumToText ? 'text' : 'number'}"
+                  placeholder="${isNumToText ? 'Ketik di sini, contoh: dua puluh satu' : 'Ketik angkanya di sini, contoh: 36'}"
+                  onkeydown="if(event.key==='Enter') checkRWAnswer()"
+                  class="w-full text-center text-xl sm:text-2xl font-extrabold text-slate-900 bg-white rounded-2xl py-3.5 px-4 border-4 border-amber-400 focus:outline-none focus:ring-4 focus:ring-sky-300" />
+
+                <!-- Tombol Bantuan Kata Cepat (Memudahkan anak kelas 2 mengetik di HP) -->
+                ${isNumToText ? `
+                  <div class="flex flex-wrap justify-center gap-1.5">
+                    ${['dua', 'tiga', 'empat', 'lima', 'puluh', 'satu', 'dua', 'lima', 'delapan'].map(w => `
+                      <button onclick="appendWordToRW('${w}')" class="bg-emerald-800 hover:bg-emerald-700 text-emerald-100 text-xs font-bold px-3 py-1.5 rounded-xl border border-emerald-600">
+                        + ${w}
+                      </button>
+                    `).join('')}
+                    <button onclick="document.getElementById('rwInputBox').value=''" class="bg-rose-800 text-rose-100 text-xs font-bold px-3 py-1.5 rounded-xl">
+                      Hapus
+                    </button>
+                  </div>
+                ` : ''}
+
+                <div class="flex flex-wrap justify-center gap-3 pt-2">
+                  <button onclick="checkRWAnswer()" class="btn-kid bg-amber-400 hover:bg-amber-300 text-slate-950 font-display font-bold text-base sm:text-lg px-7 py-3 rounded-2xl border-2 border-amber-600">
+                    ✅ Periksa Tulisan Saya
+                  </button>
+                  <button onclick="nextRWQuestion()" class="btn-kid bg-sky-500 hover:bg-sky-400 text-white font-display font-bold text-base sm:text-lg px-6 py-3 rounded-2xl border-2 border-sky-700">
+                    Soal Berikutnya ➡️
+                  </button>
+                </div>
+              </div>
+
+              <!-- Area Umpan Balik & Penjelasan -->
+              <div id="rwFeedbackArea" class="hidden rounded-2xl p-4 text-left border-2"></div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function switchRWMode(mode) {
+      playTone('click');
+      appState.rwMode = mode;
+      appState.rwIndex = 0;
+      renderBacaTulis(document.getElementById('appContent'));
+    }
+
+    function appendWordToRW(word) {
+      playTone('click');
+      const inp = document.getElementById('rwInputBox');
+      inp.value = (inp.value.trim() + ' ' + word).trim();
+      inp.focus();
+    }
+
+    function checkRWAnswer() {
+      const isNumToText = appState.rwMode === 'numToText';
+      const list = isNumToText ? RW_NUM_TO_TEXT : RW_TEXT_TO_NUM;
+      const item = list[appState.rwIndex % list.length];
+      const rawVal = document.getElementById('rwInputBox').value.trim().toLowerCase().replace(/\s+/g, ' ');
+      const feedback = document.getElementById('rwFeedbackArea');
+
+      if (!rawVal) {
+        playTone('gentle');
+        showToast('Papan Tulis Masih Kosong', 'Ketik jawabanmu pada kotak putih di papan tulis dulu ya!', '✏️', true);
+        return;
+      }
+
+      const expected = isNumToText ? item.text.toLowerCase() : item.num;
+      const isCorrect = rawVal === expected;
+
+      feedback.classList.remove('hidden');
+      if (isCorrect) {
+        playTone('success');
+        appState.rwScore += 10;
+        addPoints(10);
+        speakText('Benar sekali! Tulisanmu sangat rapi dan tepat.');
+        feedback.className = 'rounded-2xl p-4 text-left border-2 bg-emerald-800 border-emerald-400 text-white animate-pop';
+        feedback.innerHTML = `
+          <p class="font-display font-bold text-lg text-amber-300">🌟 MasyaAllah, Benar Sekali!</p>
+          <p class="text-sm font-bold mt-1">
+            Penjelasan: Angka <strong>${item.num}</strong> dibaca dan ditulis <strong>"${item.text}"</strong> karena terdiri dari ${Math.floor(Number(item.num)/10)} puluhan dan ${Number(item.num)%10} satuan.
+          </p>
+        `;
+      } else {
+        playTone('gentle');
+        feedback.className = 'rounded-2xl p-4 text-left border-2 bg-amber-900/90 border-amber-400 text-white animate-pop';
+        feedback.innerHTML = `
+          <p class="font-display font-bold text-lg text-amber-300">💡 Hampir Tepat! Mari Kita Periksa Bersama:</p>
+          <p class="text-sm font-bold mt-1">
+            Jawabanmu: <em>"${rawVal}"</em>.<br/>
+            Yang tepat adalah: <strong class="text-emerald-300">${isNumToText ? item.text : item.num}</strong>.<br/>
+            Ingat ya, perhatikan angka puluhannya terlebih dahulu lalu angka satuannya. Ayo coba soal berikutnya!
+          </p>
+        `;
+      }
+    }
+
+    function nextRWQuestion() {
+      playTone('click');
+      appState.rwIndex += 1;
+      renderBacaTulis(document.getElementById('appContent'));
+    }
+
+    /*************************************************************************
+     * MENU 7: MODUL 5 – LABORATORIUM MATEMATIKA (3 EKSPERIMEN + KBC)
+     *************************************************************************/
+    function renderLaboratorium(el) {
+      const tab = appState.labTab;
+      let contentHTML = '';
+
+      if (tab === 'exp1') {
+        // Eksperimen 1: Menghitung Benda & Mencatat Hasil (Integrasi KBC: Tasbih 33x & Berbagi 40 Kurma)
+        const totalKurma = appState.exp1KurmaDistributed.reduce((a, b) => a + b, 0);
+        const sisaKurma = 40 - totalKurma;
+        const isFair = appState.exp1KurmaDistributed.every(v => v === 10);
+
+        contentHTML = `
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Aktivitas 1A: Cinta Allah & Rasul-Nya (Menghitung Tasbih 33x) -->
+            <div class="bg-emerald-50 rounded-3xl p-5 border-4 border-emerald-400 space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="bg-emerald-600 text-white text-xs font-black px-3 py-1 rounded-full">💚 Cinta Allah & Rasul-Nya</span>
+                <span class="font-display font-bold text-emerald-900">Target: 33 Kali</span>
+              </div>
+              <h3 class="font-display font-bold text-xl text-emerald-950">Eksperimen 1A: Menghitung Biji Tasbih</h3>
+              <p class="text-sm text-slate-700 font-bold">
+                Setelah shalat, kita bertasbih <em>"Subhanallah"</em> sebanyak <strong>33 kali</strong>. Tekan tombol tasbih di bawah satu per satu dengan tenang dan teliti!
+              </p>
+
+              <!-- Visual Lingkaran Tasbih -->
+              <div class="bg-white rounded-2xl p-4 border-2 border-emerald-200 text-center">
+                <div class="text-5xl font-display font-bold text-emerald-700">${appState.exp1TasbihCount} <span class="text-lg text-slate-400">/ 33</span></div>
+                <p class="text-xs font-extrabold text-amber-700 mt-1">${terbilang(appState.exp1TasbihCount)}</p>
+                <div class="flex flex-wrap justify-center gap-1 my-3 max-h-24 overflow-y-auto">
+                  ${Array(33).fill(0).map((_, idx) => `
+                    <span class="w-4 h-4 rounded-full border ${idx < appState.exp1TasbihCount ? 'bg-emerald-500 border-emerald-700 scale-110' : 'bg-slate-200 border-slate-300'} transition"></span>
+                  `).join('')}
+                </div>
+                <div class="flex justify-center gap-2">
+                  <button onclick="incrementTasbih()" class="btn-kid bg-emerald-600 hover:bg-emerald-500 text-white font-display font-bold px-5 py-2.5 rounded-2xl border-2 border-emerald-800">
+                    📿 Tekan Tasbih (+1)
+                  </button>
+                  <button onclick="appState.exp1TasbihCount=0; renderLaboratorium(document.getElementById('appContent'))" class="btn-kid bg-slate-200 text-slate-800 font-bold px-3.5 py-2.5 rounded-2xl text-xs">
+                    Reset
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Aktivitas 1B: Cinta Diri & Sesama (Berbagi 40 Buah Kurma Secara Adil) -->
+            <div class="bg-amber-50 rounded-3xl p-5 border-4 border-amber-400 space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="bg-orange-500 text-white text-xs font-black px-3 py-1 rounded-full">🤝 Cinta Sesama Manusia</span>
+                <span class="font-display font-bold text-amber-900">Sisa Kurma: ${sisaKurma} / 40</span>
+              </div>
+              <h3 class="font-display font-bold text-xl text-amber-950">Eksperimen 1B: Berbagi 40 Kurma Secara Adil</h3>
+              <p class="text-sm text-slate-700 font-bold">
+                Ada <strong>40 buah kurma</strong> yang akan dibagikan secara adil kepada <strong>4 teman</strong> (Ahmad, Fatimah, Zaid, Aisyah). Bagikan hingga setiap teman mendapat jumlah yang sama!
+              </p>
+
+              <div class="grid grid-cols-2 gap-2.5">
+                ${['Ahmad', 'Fatimah', 'Zaid', 'Aisyah'].map((nama, idx) => `
+                  <div class="bg-white p-3 rounded-2xl border-2 border-amber-300 text-center">
+                    <p class="font-display font-bold text-sm text-slate-800">👤 ${nama}</p>
+                    <p class="text-2xl font-display font-bold text-orange-600 my-1">${appState.exp1KurmaDistributed[idx]} <span class="text-xs text-slate-500">kurma</span></p>
+                    <div class="flex justify-center gap-1.5">
+                      <button onclick="giveKurma(${idx}, 5)" class="btn-kid bg-amber-400 text-slate-900 font-black px-2.5 py-1 rounded-lg text-xs">+5</button>
+                      <button onclick="giveKurma(${idx}, 1)" class="btn-kid bg-emerald-500 text-white font-black px-2.5 py-1 rounded-lg text-xs">+1</button>
+                      <button onclick="giveKurma(${idx}, -1)" class="btn-kid bg-slate-200 text-slate-700 font-black px-2 py-1 rounded-lg text-xs">-1</button>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+
+              ${isFair ? `
+                <div class="bg-emerald-600 text-white p-3 rounded-2xl text-center font-bold text-xs sm:text-sm animate-pop">
+                  🌟 Alhamdulillah! Semua 40 kurma terbagi adil: masing-masing teman mendapat <strong>10 buah kurma</strong>!
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      } else if (tab === 'exp2') {
+        // Eksperimen 2: Membentuk Bilangan Target
+        const currentVal = (appState.exp2Tens * 10) + appState.exp2Ones;
+        const isMatch = currentVal === appState.exp2Target;
+        contentHTML = `
+          <div class="bg-sky-50 rounded-3xl p-5 sm:p-7 border-4 border-sky-400 space-y-5">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h3 class="font-display font-bold text-xl sm:text-2xl text-sky-950">Eksperimen 2: Mesin Pembentuk Bilangan</h3>
+                <p class="text-sm text-slate-700 font-bold">Gabungkan blok <strong>Puluhan (10)</strong> dan <strong>Satuan (1)</strong> untuk membentuk angka target!</p>
+              </div>
+              <button onclick="newExp2Target()" class="btn-kid bg-orange-500 text-white font-extrabold px-4 py-2.5 rounded-2xl text-xs sm:text-sm border-2 border-orange-700">
+                🎲 Ganti Angka Target
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+              <div class="bg-white rounded-3xl p-5 border-4 border-amber-400 text-center">
+                <p class="text-xs font-black text-amber-700 uppercase">Angka Target</p>
+                <div class="text-6xl font-display font-bold text-orange-600 my-2">${appState.exp2Target}</div>
+                <p class="text-sm font-extrabold text-slate-700">${terbilang(appState.exp2Target)}</p>
+              </div>
+
+              <div class="bg-white rounded-3xl p-5 border-4 border-emerald-400 text-center space-y-3">
+                <p class="font-display font-bold text-emerald-900">Kontrol Blok Puluhan & Satuan</p>
+                <div class="flex items-center justify-between bg-emerald-50 p-2.5 rounded-xl">
+                  <span class="font-extrabold text-sm text-emerald-900">Puluhan (10):</span>
+                  <div class="flex items-center gap-2">
+                    <button onclick="adjustExp2('tens', -1)" class="btn-kid bg-white w-8 h-8 rounded-lg font-black border">-</button>
+                    <span class="font-display font-bold text-xl w-6">${appState.exp2Tens}</span>
+                    <button onclick="adjustExp2('tens', 1)" class="btn-kid bg-emerald-600 text-white w-8 h-8 rounded-lg font-black">+</button>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between bg-amber-50 p-2.5 rounded-xl">
+                  <span class="font-extrabold text-sm text-amber-900">Satuan (1):</span>
+                  <div class="flex items-center gap-2">
+                    <button onclick="adjustExp2('ones', -1)" class="btn-kid bg-white w-8 h-8 rounded-lg font-black border">-</button>
+                    <span class="font-display font-bold text-xl w-6">${appState.exp2Ones}</span>
+                    <button onclick="adjustExp2('ones', 1)" class="btn-kid bg-amber-500 text-white w-8 h-8 rounded-lg font-black">+</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-slate-900 text-white rounded-3xl p-5 text-center">
+                <p class="text-xs font-bold text-sky-300 uppercase">Hasil Gabunganmu</p>
+                <div class="text-6xl font-display font-bold ${isMatch ? 'text-emerald-400' : 'text-white'} my-2">${currentVal}</div>
+                <p class="text-xs font-bold text-slate-300">${appState.exp2Tens}0 + ${appState.exp2Ones} = ${currentVal}</p>
+                ${isMatch ? `<div class="mt-2 bg-emerald-600 text-white text-xs font-black py-1.5 px-3 rounded-xl animate-pop">🎉 Tepat Sekali!</div>` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        // Eksperimen 3: Problem-Based Learning (PBL) Bertahap
+        contentHTML = `
+          <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl p-5 sm:p-7 border-4 border-orange-400 space-y-5">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl bg-white p-2.5 rounded-2xl shadow">🧩</span>
+              <div>
+                <span class="text-xs font-black text-orange-700 uppercase">Problem-Based Learning (PBL) • Langkah demi Langkah</span>
+                <h3 class="font-display font-bold text-xl sm:text-2xl text-slate-900">Eksperimen 3: Tantangan Kelereng Fatimah & Aisyah</h3>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-4 sm:p-5 border-2 border-orange-300 text-base sm:text-lg font-extrabold text-slate-800">
+              "Fatimah memiliki <strong>24 kelereng</strong>. Aisyah memberikan <strong>6 kelereng lagi</strong> kepada Fatimah. Berapa jumlah kelereng Fatimah sekarang?"
+            </div>
+
+            <!-- Langkah 1: Amati Kelereng Awal (24) -->
+            <div class="bg-white rounded-2xl p-4 border-2 border-sky-200 space-y-2">
+              <p class="font-display font-bold text-sky-900">Langkah 1: Amati 24 Kelereng Awal Fatimah (2 Puluhan + 4 Satuan)</p>
+              <div class="flex flex-wrap items-center gap-3">
+                <span class="bg-emerald-100 border border-emerald-400 px-3 py-1.5 rounded-xl text-xs font-black text-emerald-900">🔵 10 Kelereng</span>
+                <span class="bg-emerald-100 border border-emerald-400 px-3 py-1.5 rounded-xl text-xs font-black text-emerald-900">🔵 10 Kelereng</span>
+                <span class="bg-amber-100 border border-amber-400 px-3 py-1.5 rounded-xl text-xs font-black text-amber-900">🟠🟠🟠🟠 (4 Satuan)</span>
+              </div>
+            </div>
+
+            <!-- Langkah 2: Gabungkan 6 Kelereng dari Aisyah -->
+            <div class="bg-white rounded-2xl p-4 border-2 border-emerald-200 space-y-3">
+              <p class="font-display font-bold text-emerald-900">Langkah 2: Gabungkan 4 Satuan dengan 6 Kelereng dari Aisyah!</p>
+              <p class="text-sm text-slate-600 font-bold">4 satuan + 6 satuan = <strong>10 satuan</strong>. Wah, 10 satuan bisa diikat menjadi <strong>1 puluhan baru</strong>!</p>
+              ${appState.exp3Step === 1 ? `
+                <button onclick="appState.exp3Step=2; playTone('bundle'); renderLaboratorium(document.getElementById('appContent'))"
+                  class="btn-kid bg-emerald-600 text-white font-extrabold px-5 py-2.5 rounded-2xl text-sm border-2 border-emerald-800">
+                  🔗 Gabungkan 4 + 6 Menjadi 1 Puluhan Baru!
+                </button>
+              ` : `
+                <div class="bg-emerald-100 border-2 border-emerald-500 p-4 rounded-2xl animate-pop">
+                  <p class="font-display font-bold text-lg text-emerald-900">
+                    🎉 Sekarang ada 2 puluhan lama + 1 puluhan baru = <strong>3 puluhan (30)</strong>!
+                  </p>
+                  <p class="text-sm font-bold text-slate-700 mt-1">
+                    Jadi, jumlah kelereng Fatimah sekarang adalah <strong>30 (Tiga puluh)</strong> kelereng. Hebat kamu memahami prosesnya!
+                  </p>
+                </div>
+              `}
+            </div>
+          </div>
+        `;
+      }
+
+      el.innerHTML = `
+        <div class="space-y-6 animate-pop">
+          <div class="bg-white rounded-3xl p-4 sm:p-5 border-4 border-emerald-400 shadow-md flex flex-wrap gap-2">
+            <button onclick="switchLabTab('exp1')" class="btn-kid px-4 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm border-2 ${tab==='exp1' ? 'bg-emerald-600 text-white border-emerald-800' : 'bg-emerald-50 text-emerald-900 border-emerald-200'}">
+              🧪 Eksperimen 1: Tasbih & Berbagi Kurma
+            </button>
+            <button onclick="switchLabTab('exp2')" class="btn-kid px-4 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm border-2 ${tab==='exp2' ? 'bg-sky-600 text-white border-sky-800' : 'bg-sky-50 text-sky-900 border-sky-200'}">
+              🧪 Eksperimen 2: Membentuk Bilangan
+            </button>
+            <button onclick="switchLabTab('exp3')" class="btn-kid px-4 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm border-2 ${tab==='exp3' ? 'bg-orange-500 text-white border-orange-700' : 'bg-orange-50 text-orange-900 border-orange-200'}">
+              🧪 Eksperimen 3: Masalah PBL Kelereng
+            </button>
+          </div>
+          ${contentHTML}
+        </div>
+      `;
+    }
+
+    function switchLabTab(tab) {
+      playTone('click');
+      appState.labTab = tab;
+      renderLaboratorium(document.getElementById('appContent'));
+    }
+
+    function incrementTasbih() {
+      if (appState.exp1TasbihCount >= 33) {
+        showToast('Alhamdulillah 33x!', 'Kamu sudah menyelesaikan 33 hitungan tasbih dengan teliti!', '📿');
+        return;
+      }
+      appState.exp1TasbihCount += 1;
+      playTone('click');
+      if (appState.exp1TasbihCount === 33) {
+        playTone('success');
+        addPoints(15);
+        speakText('Alhamdulillah, tiga puluh tiga kali tasbih selesai!');
+        showToast('MasyaAllah!', '33 hitungan tasbih selesai dengan penuh ketelitian! +15 Poin', '💚');
+      }
+      renderLaboratorium(document.getElementById('appContent'));
+    }
+
+    function giveKurma(friendIdx, delta) {
+      const totalNow = appState.exp1KurmaDistributed.reduce((a, b) => a + b, 0);
+      const val = appState.exp1KurmaDistributed[friendIdx];
+      if (delta > 0 && totalNow + delta > 40) {
+        playTone('gentle');
+        showToast('Kurma Sudah Habis!', 'Total kurma hanya ada 40 buah. Kurangi dari teman lain jika belum adil ya!', '🌴', true);
+        return;
+      }
+      if (val + delta < 0) return;
+      playTone('click');
+      appState.exp1KurmaDistributed[friendIdx] += delta;
+      if (appState.exp1KurmaDistributed.every(v => v === 10)) {
+        playTone('success');
+        addPoints(20);
+        unlockBadge('kerjasama', 'Bintang Kerja Sama');
+      }
+      renderLaboratorium(document.getElementById('appContent'));
+    }
+
+    function newExp2Target() {
+      playTone('click');
+      appState.exp2Target = Math.floor(Math.random() * 41) + 10; // 10 - 50
+      appState.exp2Tens = 0;
+      appState.exp2Ones = 0;
+      renderLaboratorium(document.getElementById('appContent'));
+    }
+
+    function adjustExp2(type, delta) {
+      playTone('click');
+      if (type === 'tens') {
+        appState.exp2Tens = Math.max(0, Math.min(5, appState.exp2Tens + delta));
+      } else {
+        appState.exp2Ones = Math.max(0, Math.min(9, appState.exp2Ones + delta));
+      }
+      if ((appState.exp2Tens * 10) + appState.exp2Ones === appState.exp2Target) {
+        playTone('success');
+        addPoints(10);
+      }
+      renderLaboratorium(document.getElementById('appContent'));
+    }
+
+    /*************************************************************************
+     * MENU 8: PERMAINAN EDUKATIF (5 MINI-GAME + LEVEL MUDAH, SEDANG, MENANTANG)
+     *************************************************************************/
+    const GAMES_LIST = [
+      { id: 'tebak', title: '1. Tebak Angka', icon: '🔍', desc: 'Tebak angka yang sesuai dengan gambar kelompok benda!' },
+      { id: 'cepat', title: '2. Hitung Cepat', icon: '⚡', desc: 'Hitung kumpulan buah & benda dengan cepat dan tepat!' },
+      { id: 'pasangkan', title: '3. Pasangkan Angka', icon: '🔗', desc: 'Pasangkan lambang bilangan dengan nama bilangannya!' },
+      { id: 'susun', title: '4. Susun Puluhan', icon: '🧱', desc: 'Tentukan berapa puluhan dan satuan untuk membentuk angka!' },
+      { id: 'berburu', title: '5. Berburu Angka', icon: '🎯', desc: 'Temukan dan klik semua kartu angka yang sesuai petunjuk!' }
+    ];
+
+    function getLevelRange() {
+      if (appState.gameLevel === 'mudah') return [1, 20];
+      if (appState.gameLevel === 'sedang') return [21, 35];
+      return [36, 50];
+    }
+
+    function initGameRound(gameId) {
+      const [min, max] = getLevelRange();
+      const randNum = () => Math.floor(Math.random() * (max - min + 1)) + min;
+
+      if (gameId === 'tebak' || gameId === 'cepat') {
+        const target = randNum();
+        const opts = new Set([target]);
+        while (opts.size < 4) {
+          const fake = Math.max(0, Math.min(50, target + (Math.floor(Math.random() * 11) - 5)));
+          opts.add(fake);
+        }
+        appState.gameStateData = {
+          target,
+          options: Array.from(opts).sort(() => Math.random() - 0.5),
+          answered: false
+        };
+      } else if (gameId === 'pasangkan') {
+        const nums = new Set();
+        while (nums.size < 4) nums.add(randNum());
+        const arr = Array.from(nums);
+        appState.gameStateData = {
+          leftList: arr,
+          rightList: [...arr].sort(() => Math.random() - 0.5),
+          selectedLeft: null,
+          matched: []
+        };
+      } else if (gameId === 'susun') {
+        const target = randNum();
+        appState.gameStateData = {
+          target,
+          userTens: 0,
+          userOnes: 0,
+          solved: false
+        };
+      } else if (gameId === 'berburu') {
+        const target = randNum();
+        const grid = [target, target];
+        while (grid.length < 9) {
+          const n = randNum();
+          if (n !== target) grid.push(n);
+        }
+        appState.gameStateData = {
+          target,
+          grid: grid.sort(() => Math.random() - 0.5),
+          foundIndices: []
+        };
+      }
+    }
+
+    function renderPermainan(el) {
+      if (!appState.gameStateData || !appState.gameStateData.target && appState.activeGame !== 'pasangkan') {
+        initGameRound(appState.activeGame);
+      }
+      if (appState.activeGame === 'pasangkan' && !appState.gameStateData.leftList) {
+        initGameRound('pasangkan');
+      }
+
+      const gInfo = GAMES_LIST.find(g => g.id === appState.activeGame);
+      const d = appState.gameStateData;
+      let gameBoardHTML = '';
+
+      if (appState.activeGame === 'tebak' || appState.activeGame === 'cepat') {
+        const tens = Math.floor(d.target / 10);
+        const ones = d.target % 10;
+        gameBoardHTML = `
+          <div class="text-center space-y-5">
+            <p class="font-bold text-slate-700">${appState.activeGame === 'tebak' ? 'Amati ikatan puluhan (10) dan satuan di bawah ini. Angka berapakah ini?' : 'Hitung seluruh buah jeruk di bawah ini dengan teliti!'}</p>
+            <div class="bg-emerald-50 border-2 border-emerald-300 rounded-3xl p-4 flex flex-wrap justify-center gap-3">
+              ${appState.activeGame === 'tebak' ? `
+                ${Array(tens).fill(0).map(() => `<div class="bg-amber-300 border-2 border-amber-600 px-3 py-2 rounded-2xl font-display font-bold text-amber-950">🥢 Ikatan 10</div>`).join('')}
+                ${Array(ones).fill(0).map(() => `<div class="bg-white border-2 border-sky-400 px-2.5 py-2 rounded-2xl font-bold text-sky-900">🥢 1</div>`).join('')}
+              ` : `
+                <div class="grid grid-cols-5 sm:grid-cols-10 gap-1.5">
+                  ${Array(d.target).fill(0).map(() => `<span class="text-2xl">🍊</span>`).join('')}
+                </div>
+              `}
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-xl mx-auto">
+              ${d.options.map(opt => `
+                <button onclick="answerQuizGame(${opt})" class="btn-kid bg-white hover:bg-amber-100 border-4 border-sky-400 py-4 rounded-2xl font-display font-bold text-2xl sm:text-3xl text-slate-800">
+                  ${opt}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      } else if (appState.activeGame === 'pasangkan') {
+        gameBoardHTML = `
+          <div class="space-y-4">
+            <p class="text-center font-bold text-slate-700">Klik <strong>Angka</strong> di sebelah kiri, lalu klik <strong>Nama Bilangan</strong> yang cocok di sebelah kanan!</p>
+            <div class="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
+              <div class="space-y-2.5">
+                ${d.leftList.map(num => {
+                  const isMatched = d.matched.includes(num);
+                  const isSel = d.selectedLeft === num;
+                  return `
+                    <button onclick="selectMatchLeft(${num})" ${isMatched ? 'disabled' : ''}
+                      class="btn-kid w-full py-3.5 rounded-2xl font-display font-bold text-2xl border-2
+                      ${isMatched ? 'bg-emerald-500 text-white border-emerald-700 opacity-75' : isSel ? 'bg-amber-400 text-slate-950 border-amber-600' : 'bg-white text-slate-800 border-sky-300'}">
+                      ${num} ${isMatched ? '✅' : ''}
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+              <div class="space-y-2.5">
+                ${d.rightList.map(num => {
+                  const isMatched = d.matched.includes(num);
+                  return `
+                    <button onclick="selectMatchRight(${num})" ${isMatched ? 'disabled' : ''}
+                      class="btn-kid w-full py-3.5 px-2 rounded-2xl font-extrabold text-sm sm:text-base border-2
+                      ${isMatched ? 'bg-emerald-500 text-white border-emerald-700 opacity-75' : 'bg-sky-50 hover:bg-sky-100 text-sky-950 border-sky-300'}">
+                      ${terbilang(num)}
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (appState.activeGame === 'susun') {
+        const cur = (d.userTens * 10) + d.userOnes;
+        gameBoardHTML = `
+          <div class="text-center space-y-4 max-w-lg mx-auto">
+            <p class="font-bold text-slate-700">Susun puluhan dan satuan untuk membentuk bilangan:</p>
+            <div class="bg-amber-300 border-4 border-amber-500 rounded-3xl py-4 px-6 inline-block">
+              <span class="text-5xl font-display font-bold text-slate-900">${d.target}</span>
+              <p class="text-xs font-black text-amber-950 mt-1">${terbilang(d.target)}</p>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="bg-emerald-50 p-3 rounded-2xl border-2 border-emerald-400">
+                <p class="text-xs font-black text-emerald-800">PULUHAN</p>
+                <p class="text-3xl font-display font-bold my-1">${d.userTens}</p>
+                <div class="flex justify-center gap-2">
+                  <button onclick="dGameTens(-1)" class="btn-kid bg-white px-3 py-1 rounded-xl font-black border">-</button>
+                  <button onclick="dGameTens(1)" class="btn-kid bg-emerald-600 text-white px-3 py-1 rounded-xl font-black">+</button>
+                </div>
+              </div>
+              <div class="bg-orange-50 p-3 rounded-2xl border-2 border-orange-400">
+                <p class="text-xs font-black text-orange-800">SATUAN</p>
+                <p class="text-3xl font-display font-bold my-1">${d.userOnes}</p>
+                <div class="flex justify-center gap-2">
+                  <button onclick="dGameOnes(-1)" class="btn-kid bg-white px-3 py-1 rounded-xl font-black border">-</button>
+                  <button onclick="dGameOnes(1)" class="btn-kid bg-orange-500 text-white px-3 py-1 rounded-xl font-black">+</button>
+                </div>
+              </div>
+            </div>
+            <button onclick="checkSusunGame()" class="btn-kid bg-emerald-600 text-white font-display font-bold px-6 py-3 rounded-2xl border-2 border-emerald-800">
+              ✅ Cek Susunan (${cur})
+            </button>
+          </div>
+        `;
+      } else if (appState.activeGame === 'berburu') {
+        gameBoardHTML = `
+          <div class="text-center space-y-4 max-w-lg mx-auto">
+            <div class="bg-sky-100 border-2 border-sky-400 rounded-2xl p-3">
+              <p class="text-sm font-bold text-sky-900">Temukan <strong>2 kartu angka</strong> yang bernilai:</p>
+              <p class="text-2xl font-display font-bold text-orange-600 mt-0.5">"${terbilang(d.target)}"</p>
+            </div>
+            <div class="grid grid-cols-3 gap-3">
+              ${d.grid.map((num, idx) => {
+                const found = d.foundIndices.includes(idx);
+                return `
+                  <button onclick="huntCard(${idx}, ${num})"
+                    class="btn-kid py-5 rounded-2xl font-display font-bold text-3xl border-4
+                    ${found ? 'bg-emerald-500 text-white border-emerald-700' : 'bg-white hover:bg-amber-100 text-slate-800 border-amber-300'}">
+                    ${num} ${found ? '⭐' : ''}
+                  </button>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      el.innerHTML = `
+        <div class="space-y-6 animate-pop">
+          <!-- Pilihan 5 Permainan -->
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+            ${GAMES_LIST.map(g => `
+              <button onclick="selectMiniGame('${g.id}')"
+                class="btn-kid p-3 rounded-2xl border-2 text-center font-extrabold text-xs sm:text-sm
+                ${appState.activeGame === g.id
+                  ? 'bg-orange-500 text-white border-orange-700'
+                  : 'bg-white hover:bg-amber-50 text-slate-800 border-amber-200'}">
+                <div class="text-2xl mb-1">${g.icon}</div>
+                <div>${g.title}</div>
+              </button>
+            `).join('')}
+          </div>
+
+          <!-- Area Permainan Aktif -->
+          <div class="bg-white rounded-3xl p-5 sm:p-7 border-4 border-orange-400 shadow-xl space-y-5">
+            <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b-2 border-orange-100">
+              <div>
+                <h2 class="font-display font-bold text-2xl text-slate-900">${gInfo.icon} ${gInfo.title}</h2>
+                <p class="text-xs sm:text-sm text-slate-600 font-bold">${gInfo.desc}</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <!-- Pilihan Level -->
+                <div class="bg-slate-100 p-1 rounded-2xl flex gap-1 border">
+                  ${[
+                    { id: 'mudah', label: '🌱 Mudah (1-20)' },
+                    { id: 'sedang', label: '🌿 Sedang (21-35)' },
+                    { id: 'menantang', label: '🔥 Menantang (36-50)' }
+                  ].map(lv => `
+                    <button onclick="setGameLevel('${lv.id}')"
+                      class="px-2.5 py-1.5 rounded-xl text-xs font-extrabold transition
+                      ${appState.gameLevel === lv.id ? 'bg-emerald-600 text-white shadow' : 'text-slate-700 hover:bg-white'}">
+                      ${lv.label}
+                    </button>
+                  `).join('')}
+                </div>
+                <div class="bg-amber-300 text-slate-950 font-black px-3.5 py-2 rounded-2xl text-xs sm:text-sm">
+                  Skor Game: ${appState.gameScore}
+                </div>
+              </div>
+            </div>
+
+            ${gameBoardHTML}
+
+            <div class="text-center pt-2">
+              <button onclick="initGameRound('${appState.activeGame}'); renderPermainan(document.getElementById('appContent'))"
+                class="btn-kid bg-sky-500 text-white font-extrabold px-5 py-2 rounded-2xl text-xs sm:text-sm border-2 border-sky-700">
+                🔄 Soal Baru / Main Ulang
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function selectMiniGame(id) {
+      playTone('click');
+      appState.activeGame = id;
+      initGameRound(id);
+      renderPermainan(document.getElementById('appContent'));
+    }
+
+    function setGameLevel(lv) {
+      playTone('click');
+      appState.gameLevel = lv;
+      initGameRound(appState.activeGame);
+      renderPermainan(document.getElementById('appContent'));
+    }
+
+    function answerQuizGame(opt) {
+      if (opt === appState.gameStateData.target) {
+        playTone('success');
+        appState.gameScore += 10;
+        addPoints(10);
+        showToast('Tepat Sekali! 🎉', `Benar, jumlahnya adalah ${opt} (${terbilang(opt)})!`, '🌟');
+        initGameRound(appState.activeGame);
+        renderPermainan(document.getElementById('appContent'));
+      } else {
+        playTone('gentle');
+        showToast('Ayo Hitung Lagi!', `Bukan ${opt}, coba hitung ulang kelompok puluhannya ya!`, '😊', true);
+      }
+    }
+
+    function selectMatchLeft(num) {
+      playTone('click');
+      appState.gameStateData.selectedLeft = num;
+      renderPermainan(document.getElementById('appContent'));
+    }
+
+    function selectMatchRight(num) {
+      const sel = appState.gameStateData.selectedLeft;
+      if (sel === null) {
+        showToast('Pilih Angka Dulu', 'Klik kotak angka di sebelah kiri terlebih dahulu ya!', '👈', true);
+        return;
+      }
+      if (sel === num) {
+        playTone('success');
+        appState.gameStateData.matched.push(num);
+        appState.gameStateData.selectedLeft = null;
+        appState.gameScore += 5;
+        addPoints(5);
+        if (appState.gameStateData.matched.length === 4) {
+          showToast('Hebat!', 'Semua pasangan angka berhasil kamu temukan!', '🔗');
+          setTimeout(() => { initGameRound('pasangkan'); renderPermainan(document.getElementById('appContent')); }, 900);
+        }
+      } else {
+        playTone('gentle');
+        showToast('Belum Cocok', `${sel} bukan "${terbilang(num)}". Coba pasangkan lagi ya!`, '🤔', true);
+      }
+      renderPermainan(document.getElementById('appContent'));
+    }
+
+    function dGameTens(delta) {
+      playTone('click');
+      appState.gameStateData.userTens = Math.max(0, Math.min(5, appState.gameStateData.userTens + delta));
+      renderPermainan(document.getElementById('appContent'));
+    }
+
+    function dGameOnes(delta) {
+      playTone('click');
+      appState.gameStateData.userOnes = Math.max(0, Math.min(9, appState.gameStateData.userOnes + delta));
+      renderPermainan(document.getElementById('appContent'));
+    }
+
+    function checkSusunGame() {
+      const d = appState.gameStateData;
+      const cur = (d.userTens * 10) + d.userOnes;
+      if (cur === d.target) {
+        playTone('success');
+        appState.gameScore += 10;
+        addPoints(10);
+        showToast('Susunan Tepat!', `${d.target} = ${d.userTens} puluhan + ${d.userOnes} satuan!`, '🧱');
+        initGameRound('susun');
+        renderPermainan(document.getElementById('appContent'));
+      } else {
+        playTone('gentle');
+        showToast('Coba Sesuaikan Lagi', `Susunanmu bernilai ${cur}, sedangkan targetnya ${d.target}.`, '💡', true);
+      }
+    }
+
+    function huntCard(idx, num) {
+      const d = appState.gameStateData;
+      if (d.foundIndices.includes(idx)) return;
+      if (num === d.target) {
+        playTone('success');
+        d.foundIndices.push(idx);
+        appState.gameScore += 5;
+        addPoints(5);
+        if (d.foundIndices.length === 2) {
+          showToast('Berhasil Berburu!', `Kamu menemukan kedua angka ${d.target}!`, '🎯');
+          setTimeout(() => { initGameRound('berburu'); renderPermainan(document.getElementById('appContent')); }, 800);
+        }
+      } else {
+        playTone('gentle');
+        showToast('Bukan Angka Itu', `Itu angka ${num} (${terbilang(num)}). Cari yang bernilai "${terbilang(d.target)}"!`, '🔎', true);
+      }
+      renderPermainan(document.getElementById('appContent'));
+    }
+
+    /*************************************************************************
+     * MENU 9: KUIS DAN EVALUASI (10 SOAL SUMATIF + REMEDIAL + PENGAYAAN)
+     *************************************************************************/
+    const SUMATIF_QUESTIONS = [
+      // 4 Pilihan Ganda
+      { id: 's1', type: 'pg', q: 'Lambang bilangan dari "tiga puluh tujuh" adalah...', options: ['37', '73', '30'], ans: '37' },
+      { id: 's2', type: 'pg', q: 'Bilangan 45 terdiri dari...', options: ['5 puluhan + 4 satuan', '4 puluhan + 5 satuan', '40 puluhan + 5 satuan'], ans: '4 puluhan + 5 satuan' },
+      { id: 's3', type: 'pg', q: 'Jika dalam piring tidak ada kue sama sekali, lambang bilangannya adalah...', options: ['1', '10', '0'], ans: '0' },
+      { id: 's4', type: 'pg', q: 'Urutan membilang mundur setelah 32, 31, 30 adalah...', options: ['29', '33', '28'], ans: '29' },
+      // 3 Isian Singkat
+      { id: 's5', type: 'isian', q: 'Tuliskan lambang bilangan dari "empat puluh delapan" (angka saja):', ans: '48' },
+      { id: 's6', type: 'isian', q: '3 puluhan dan 9 satuan membentuk bilangan...', ans: '39' },
+      { id: 's7', type: 'isian', q: 'Tuliskan nama bilangan dari angka 26 dengan huruf kecil:', ans: 'dua puluh enam' },
+      // 3 Pemecahan Masalah Sederhana
+      { id: 's8', type: 'masalah', q: 'Ahmad memiliki 3 ikatan stik es krim (masing-masing 10) dan 4 stik lepas. Berapa jumlah semua stik Ahmad?', ans: '34' },
+      { id: 's9', type: 'masalah', q: 'Fatimah menghitung tasbih sebanyak 33 kali, lalu ditambah 7 kali lagi. Berapa jumlah hitungan tasbih Fatimah?', ans: '40' },
+      { id: 's10', type: 'masalah', q: 'Di perpustakaan madrasah ada 42 buku cerita. Angka 4 pada bilangan 42 menempati nilai tempat...', options: ['Satuan', 'Puluhan', 'Ratusan'], ans: 'Puluhan' }
+    ];
+
+    function renderEvaluasi(el) {
+      const mode = appState.evalMode;
+      let bodyHTML = '';
+
+      if (mode === 'sumatif') {
+        // Hitung hasil jika sudah dikumpulkan
+        let correctCount = 0;
+        if (appState.sumatifSubmitted) {
+          SUMATIF_QUESTIONS.forEach(q => {
+            const u = (appState.sumatifAnswers[q.id] || '').trim().toLowerCase().replace(/\s+/g, ' ');
+            if (u === q.ans.toLowerCase()) correctCount++;
+          });
+        }
+        const finalScore = correctCount * 10;
+        const wrongCount = 10 - correctCount;
+
+        bodyHTML = `
+          <div class="space-y-5">
+            ${appState.sumatifSubmitted ? `
+              <!-- Rapor Hasil Asesmen Sumatif -->
+              <div class="bg-gradient-to-br from-emerald-600 to-teal-700 text-white rounded-3xl p-6 border-4 border-amber-400 shadow-xl animate-pop">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
+                  <div class="md:col-span-4 bg-white text-slate-900 rounded-3xl p-5 text-center border-4 border-amber-400">
+                    <p class="text-xs font-black text-emerald-700 uppercase">Nilai Akhir Evaluasi</p>
+                    <div class="text-6xl font-display font-bold text-emerald-700 my-1">${finalScore}</div>
+                    <p class="text-xs font-extrabold text-slate-500">Rumus: ${correctCount} Benar × 10</p>
+                  </div>
+                  <div class="md:col-span-8 space-y-2">
+                    <h3 class="font-display font-bold text-2xl text-amber-300">
+                      ${finalScore >= 80 ? '🌟 Mumtaz! Pencapaian Sangat Baik!' : finalScore >= 60 ? '👍 Jayyid! Pencapaian Baik!' : '💪 Tetap Semangat Belajar!'}
+                    </h3>
+                    <div class="flex flex-wrap gap-3 text-sm font-black">
+                      <span class="bg-emerald-800 px-3 py-1.5 rounded-xl">✅ Jawaban Benar: ${correctCount}</span>
+                      <span class="bg-rose-800 px-3 py-1.5 rounded-xl">❌ Jawaban Salah: ${wrongCount}</span>
+                    </div>
+                    <p class="text-sm text-emerald-50 font-bold pt-1">
+                      <strong>Saran Pembelajaran:</strong> ${finalScore >= 80
+                        ? 'Kamu sudah sangat mahir membilang 0–50! Ayo coba tantangan teka-teki bilangan di tab Pengayaan.'
+                        : 'Ayo berlatih kembali menghitung benda secara perlahan di tab Remedial agar semakin teliti!'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ` : ''}
+
+            <div class="space-y-4">
+              ${SUMATIF_QUESTIONS.map((q, idx) => {
+                const userVal = appState.sumatifAnswers[q.id] || '';
+                const isCorrect = appState.sumatifSubmitted && userVal.trim().toLowerCase().replace(/\s+/g, ' ') === q.ans.toLowerCase();
+                return `
+                  <div class="bg-white rounded-2xl p-4 sm:p-5 border-2 ${appState.sumatifSubmitted ? (isCorrect ? 'border-emerald-500 bg-emerald-50/40' : 'border-rose-400 bg-rose-50/40') : 'border-slate-200'} shadow-sm">
+                    <div class="flex items-start justify-between gap-2 mb-3">
+                      <p class="font-extrabold text-sm sm:text-base text-slate-800">
+                        <span class="bg-sky-100 text-sky-900 px-2.5 py-0.5 rounded-lg mr-1.5 font-display">No. ${idx + 1}</span>
+                        ${q.q}
+                      </p>
+                      ${appState.sumatifSubmitted ? `<span class="text-lg shrink-0">${isCorrect ? '✅' : '❌'}</span>` : ''}
+                    </div>
+
+                    ${q.options ? `
+                      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        ${q.options.map(opt => `
+                          <button onclick="setSumatifAns('${q.id}', '${opt}')" ${appState.sumatifSubmitted ? 'disabled' : ''}
+                            class="btn-kid py-2.5 px-3 rounded-xl font-extrabold text-sm border-2 text-left
+                            ${userVal === opt ? 'bg-sky-600 text-white border-sky-800' : 'bg-slate-50 hover:bg-sky-50 text-slate-800 border-slate-200'}">
+                            ${opt}
+                          </button>
+                        `).join('')}
+                      </div>
+                    ` : `
+                      <input type="text" value="${userVal}" ${appState.sumatifSubmitted ? 'disabled' : ''}
+                        oninput="setSumatifAns('${q.id}', this.value)"
+                        placeholder="Ketik jawabanmu di sini..."
+                        class="w-full sm:w-80 px-4 py-2.5 rounded-xl border-2 border-sky-300 font-extrabold text-base focus:outline-none focus:border-emerald-500" />
+                    `}
+
+                    ${appState.sumatifSubmitted && !isCorrect ? `
+                      <p class="text-xs font-extrabold text-emerald-800 mt-2 bg-white px-3 py-1.5 rounded-lg border border-emerald-300 inline-block">
+                        💡 Kunci Jawaban & Pembahasan: <strong>${q.ans}</strong>
+                      </p>
+                    ` : ''}
+                  </div>
+                `;
+              }).join('')}
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              ${!appState.sumatifSubmitted ? `
+                <button onclick="submitSumatif()" class="btn-kid bg-emerald-600 hover:bg-emerald-500 text-white font-display font-bold text-lg px-7 py-3.5 rounded-2xl border-2 border-emerald-800">
+                  📝 Selesai & Lihat Nilai Saya
+                </button>
+              ` : `
+                <button onclick="resetSumatif()" class="btn-kid bg-amber-400 text-slate-950 font-display font-bold text-base px-6 py-3 rounded-2xl border-2 border-amber-600">
+                  🔄 Kerjakan Ulang Evaluasi
+                </button>
+              `}
+            </div>
+          </div>
+        `;
+      } else if (mode === 'remedial') {
+        // Remedial: Menghitung benda konkret jumlah kecil secara perlahan per sepuluh
+        const target = 14;
+        const count = appState.remedialCounted.size;
+        bodyHTML = `
+          <div class="bg-sky-50 rounded-3xl p-5 sm:p-7 border-4 border-sky-400 space-y-4">
+            <h3 class="font-display font-bold text-xl sm:text-2xl text-sky-950">🌱 Bimbingan Remedial: Menghitung Perlahan & Teliti</h3>
+            <p class="text-sm font-bold text-slate-700">
+              Ayo kita berlatih menghitung <strong>14 buah apel</strong> dengan perlahan. Kelompokkan 10 apel pertama di baris atas, lalu 4 apel di baris bawah!
+            </p>
+            <div class="bg-white p-4 rounded-2xl border-2 border-sky-200">
+              <p class="text-xs font-black text-emerald-700 mb-2">Kelompok 10 Pertama (1 Puluhan):</p>
+              <div class="grid grid-cols-5 sm:grid-cols-10 gap-2 mb-4">
+                ${Array(10).fill(0).map((_, i) => `
+                  <button onclick="tapRemedial(${i})" class="p-2 rounded-xl border-2 ${appState.remedialCounted.has(i) ? 'bg-emerald-100 border-emerald-500' : 'bg-slate-50 border-slate-200'}">
+                    ${renderObjectItemSVG('apel', i)}
+                  </button>
+                `).join('')}
+              </div>
+              <p class="text-xs font-black text-amber-700 mb-2">Sisa Satuan (4 Satuan):</p>
+              <div class="grid grid-cols-5 sm:grid-cols-10 gap-2">
+                ${Array(4).fill(0).map((_, i) => {
+                  const idx = i + 10;
+                  return `
+                    <button onclick="tapRemedial(${idx})" class="p-2 rounded-xl border-2 ${appState.remedialCounted.has(idx) ? 'bg-amber-100 border-amber-500' : 'bg-slate-50 border-slate-200'}">
+                      ${renderObjectItemSVG('apel', idx)}
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+            <div class="flex items-center justify-between bg-white p-4 rounded-2xl border-2 border-emerald-400">
+              <p class="font-display font-bold text-lg text-emerald-900">Hitunganmu: ${count} / ${target} (${terbilang(count)})</p>
+              <button onclick="appState.remedialCounted=new Set(); renderEvaluasi(document.getElementById('appContent'))" class="btn-kid bg-slate-200 px-4 py-2 rounded-xl text-xs font-extrabold">
+                Ulangi
+              </button>
+            </div>
+          </div>
+        `;
+      } else {
+        // Pengayaan: Teka-teki bilangan bertahap
+        const hints = [
+          'Petunjuk 1: Aku adalah bilangan yang terletak di antara 30 dan 40. Jadi angka puluhanku adalah 3 (tiga puluh sekian).',
+          'Petunjuk 2: Angka puluhanku adalah 3. Angka satuanku 2 lebihnya dari angka puluhanku (3 + 2 = ...).',
+          'Petunjuk 3: 3 puluhan + 5 satuan = 35 (Tiga puluh lima)!'
+        ];
+        bodyHTML = `
+          <div class="bg-amber-50 rounded-3xl p-5 sm:p-7 border-4 border-amber-400 space-y-4">
+            <h3 class="font-display font-bold text-xl sm:text-2xl text-amber-950">🚀 Tantangan Pengayaan: Teka-Teki Bilangan</h3>
+            <div class="bg-white p-5 rounded-2xl border-2 border-amber-300 text-base sm:text-lg font-extrabold text-slate-800">
+              "Aku adalah bilangan antara <strong>30 dan 40</strong>. Angka satuanku <strong>2 lebihnya</strong> dari angka puluhanku. Siapakah aku?"
+            </div>
+            <div class="space-y-2">
+              ${hints.slice(0, appState.pengayaanStep + 1).map(h => `
+                <div class="bg-emerald-100 border border-emerald-400 p-3 rounded-xl text-sm font-bold text-emerald-950 animate-pop">💡 ${h}</div>
+              `).join('')}
+            </div>
+            <div class="flex flex-wrap items-center gap-3">
+              <input id="pengayaanInput" type="number" placeholder="Tebak angkanya..." class="px-4 py-2.5 rounded-xl border-2 border-amber-400 font-black text-lg w-44" />
+              <button onclick="checkPengayaan()" class="btn-kid bg-emerald-600 text-white font-extrabold px-5 py-2.5 rounded-2xl border-2 border-emerald-800">
+                ✅ Cek Jawaban
+              </button>
+              ${appState.pengayaanStep < 2 ? `
+                <button onclick="appState.pengayaanStep++; playTone('click'); renderEvaluasi(document.getElementById('appContent'))" class="btn-kid bg-sky-500 text-white font-extrabold px-4 py-2.5 rounded-2xl text-xs">
+                  Buka Petunjuk Berikutnya 🔍
+                </button>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }
+
+      el.innerHTML = `
+        <div class="space-y-6 animate-pop">
+          <div class="bg-white rounded-3xl p-4 sm:p-5 border-4 border-emerald-400 shadow-md flex flex-wrap gap-2">
+            <button onclick="switchEvalMode('sumatif')" class="btn-kid px-4 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm border-2 ${mode==='sumatif' ? 'bg-emerald-600 text-white border-emerald-800' : 'bg-emerald-50 text-emerald-900 border-emerald-200'}">
+              📝 Asesmen Sumatif (10 Soal)
+            </button>
+            <button onclick="switchEvalMode('remedial')" class="btn-kid px-4 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm border-2 ${mode==='remedial' ? 'bg-sky-600 text-white border-sky-800' : 'bg-sky-50 text-sky-900 border-sky-200'}">
+              🌱 Program Remedial
+            </button>
+            <button onclick="switchEvalMode('pengayaan')" class="btn-kid px-4 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm border-2 ${mode==='pengayaan' ? 'bg-orange-500 text-white border-orange-700' : 'bg-orange-50 text-orange-900 border-orange-200'}">
+              🚀 Tantangan Pengayaan
+            </button>
+          </div>
+          ${bodyHTML}
+        </div>
+      `;
+    }
+
+    function switchEvalMode(m) {
+      playTone('click');
+      appState.evalMode = m;
+      renderEvaluasi(document.getElementById('appContent'));
+    }
+
+    function setSumatifAns(qId, val) {
+      appState.sumatifAnswers[qId] = val;
+      if (SUMATIF_QUESTIONS.find(q => q.id === qId).options) {
+        playTone('click');
+        renderEvaluasi(document.getElementById('appContent'));
+      }
+    }
+
+    function submitSumatif() {
+      const answeredCount = Object.values(appState.sumatifAnswers).filter(v => v && v.trim() !== '').length;
+      if (answeredCount < 10) {
+        playTone('gentle');
+        showToast('Masih Ada Soal Kosong', `Kamu baru mengisi ${answeredCount} dari 10 soal. Yuk lengkapi semua soal dengan teliti!`, '📝', true);
+        return;
+      }
+      appState.sumatifSubmitted = true;
+      let correct = 0;
+      SUMATIF_QUESTIONS.forEach(q => {
+        const u = (appState.sumatifAnswers[q.id] || '').trim().toLowerCase().replace(/\s+/g, ' ');
+        if (u === q.ans.toLowerCase()) correct++;
+      });
+      playTone('success');
+      addPoints(correct * 5);
+      unlockBadge('pantangMenyerah', 'Bintang Pantang Menyerah');
+      renderEvaluasi(document.getElementById('appContent'));
+    }
+
+    function resetSumatif() {
+      playTone('click');
+      appState.sumatifAnswers = {};
+      appState.sumatifSubmitted = false;
+      renderEvaluasi(document.getElementById('appContent'));
+    }
+
+    function tapRemedial(idx) {
+      playTone('click');
+      appState.remedialCounted.add(idx);
+      speakText(String(appState.remedialCounted.size));
+      if (appState.remedialCounted.size === 14) {
+        playTone('success');
+        showToast('Hebat!', '10 apel + 4 apel = 14 apel (Empat belas)!', '🍎');
+      }
+      renderEvaluasi(document.getElementById('appContent'));
+    }
+
+    function checkPengayaan() {
+      const val = document.getElementById('pengayaanInput').value.trim();
+      if (val === '35') {
+        playTone('success');
+        addPoints(20);
+        showToast('Jenius Cilik! 🎉', 'Benar sekali! Jawabannya adalah 35 (Tiga puluh lima)! +20 Poin!', '🚀');
+      } else {
+        playTone('gentle');
+        showToast('Belum Tepat', 'Coba buka petunjuk di atas dan hitung kembali ya!', '🤔', true);
+      }
+    }
+
+    /*************************************************************************
+     * MENU 10: REFLEKSI DAN PENGHARGAAN (4 LENCANA VIRTUAL & 5 REFLEKSI)
+     *************************************************************************/
+    const REFLEKSI_QUESTIONS = [
+      '1. Apa hal baru yang kamu pelajari hari ini?',
+      '2. Bagian kegiatan mana yang paling kamu sukai?',
+      '3. Apakah kamu sudah menghitung setiap benda dengan teliti dan jujur?',
+      '4. Bagaimana cara kamu membantu teman atau berbagi dengan adil saat belajar?',
+      '5. Mengapa kita harus bersyukur kepada Allah SWT atas akal dan kemampuan belajar?'
+    ];
+
+    const BADGES_META = [
+      { key: 'ketelitian', title: 'Bintang Ketelitian', icon: '🔍', color: 'emerald', desc: 'Menghitung benda konkret satu per satu tanpa terlewat.' },
+      { key: 'semangat', title: 'Bintang Semangat Belajar', icon: '🌟', color: 'amber', desc: 'Aktif mengeksplorasi bilangan 0–50 dan mengumpulkan poin.' },
+      { key: 'kerjasama', title: 'Bintang Kerja Sama', icon: '🤝', color: 'sky', desc: 'Berbagi kurma secara adil & peduli pada sesama teman.' },
+      { key: 'pantangMenyerah', title: 'Bintang Pantang Menyerah', icon: '🏆', color: 'orange', desc: 'Menyelesaikan tantangan puluhan atau evaluasi hingga tuntas.' }
+    ];
+
+    function renderRefleksi(el) {
+      const unlockedCount = Object.values(appState.badges).filter(Boolean).length;
+      el.innerHTML = `
+        <div class="space-y-6 animate-pop">
+          <!-- Papan Koleksi 4 Penghargaan Virtual -->
+          <div class="bg-white rounded-3xl p-5 sm:p-7 border-4 border-amber-400 shadow-xl">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+              <div>
+                <h2 class="font-display font-bold text-2xl text-slate-900">🏅 Papan Lencana Penghargaan Virtual</h2>
+                <p class="text-sm text-slate-600 font-bold">Koleksi lencana karakter baik dan ketelitianmu di MI Al-Islamiyah AMZ (${unlockedCount}/4 Terbuka)</p>
+              </div>
+              <div class="bg-emerald-100 text-emerald-900 font-black px-4 py-2 rounded-2xl text-sm border-2 border-emerald-400">
+                Total Poin: ${appState.points} ⭐
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              ${BADGES_META.map(b => {
+                const earned = appState.badges[b.key];
+                return `
+                  <div class="rounded-3xl p-5 border-4 text-center transition-all
+                    ${earned
+                      ? 'bg-gradient-to-b from-amber-100 to-yellow-50 border-amber-400 shadow-lg animate-celebrate'
+                      : 'bg-slate-100 border-slate-200 opacity-65'}">
+                    <div class="text-5xl mb-2 ${earned ? '' : 'grayscale'}">${b.icon}</div>
+                    <h3 class="font-display font-bold text-lg text-slate-900">${b.title}</h3>
+                    <p class="text-xs font-bold text-slate-600 mt-1">${b.desc}</p>
+                    <span class="inline-block mt-3 px-3 py-1 rounded-full text-xs font-black
+                      ${earned ? 'bg-emerald-600 text-white' : 'bg-slate-300 text-slate-600'}">
+                      ${earned ? '✅ Sudah Diraih!' : '🔒 Belum Terbuka'}
+                    </span>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+          <!-- Refleksi Pembelajaran & Penguatan Karakter KBC -->
+          <div class="bg-gradient-to-br from-emerald-50 to-sky-50 rounded-3xl p-5 sm:p-7 border-4 border-emerald-400 shadow-lg space-y-4">
+            <h3 class="font-display font-bold text-xl sm:text-2xl text-emerald-950">💬 Refleksi Diri & Rasa Syukur</h3>
+            <p class="text-sm text-slate-700 font-bold">Tuliskan atau ceritakan jawabanmu bersama guru dan orang tua di rumah:</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${REFLEKSI_QUESTIONS.map((q, i) => `
+                <div class="bg-white p-4 rounded-2xl border-2 border-emerald-200 space-y-2">
+                  <label class="block font-extrabold text-sm text-slate-800">${q}</label>
+                  <input type="text" placeholder="Tulis jawaban singkatmu..." class="w-full px-3.5 py-2 rounded-xl border-2 border-slate-200 text-sm font-bold focus:outline-none focus:border-emerald-500" />
+                </div>
+              `).join('')}
+            </div>
+
+            <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
+              <button onclick="saveReflection()" class="btn-kid bg-emerald-600 hover:bg-emerald-500 text-white font-display font-bold text-base px-6 py-3 rounded-2xl border-2 border-emerald-800">
+                🤲 Simpan Refleksi & Ucapkan Alhamdulillah
+              </button>
+              ${appState.reflectionSaved ? `
+                <span class="font-extrabold text-sm text-emerald-800 bg-white px-4 py-2 rounded-2xl border-2 border-emerald-400">
+                  ✨ Alhamdulillahi Rabbil 'Alamin! Refleksimu tersimpan.
+                </span>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function saveReflection() {
+      playTone('success');
+      speakText('Alhamdulillahi rabbil alamin. Terima kasih sudah belajar dengan sungguh-sungguh dan penuh cinta!');
+      appState.reflectionSaved = true;
+      addPoints(15);
+      unlockBadge('kerjasama', 'Bintang Kerja Sama');
+      showToast('Alhamdulillah!', 'Terima kasih sudah merefleksikan belajarmu hari ini! +15 Poin!', '🤲');
+      renderRefleksi(document.getElementById('appContent'));
+    }
+
+    /*************************************************************************
+     * INISIALISASI SAAT HALAMAN DIMUAT
+     *************************************************************************/
+    window.addEventListener('DOMContentLoaded', () => {
+      renderNavbar();
+      navigateTo('beranda');
+    });
+  </script>
+</body>
+</html>
